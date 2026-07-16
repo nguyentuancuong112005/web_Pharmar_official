@@ -3,6 +3,8 @@
 Hệ thống quản lý kho thông minh giúp theo dõi lượng dược phẩm tồn kho, quản lý danh mục thuốc, nhà cung cấp, phân quyền nhân viên và tối ưu hóa quy trình nhập kho (Inbound) / xuất kho (Outbound) theo thời gian thực.
 
 ---
+<img width="1920" height="1080" alt="Screenshot 2026-07-16 221836" src="https://github.com/user-attachments/assets/d768b65d-d2e4-4744-b2e1-750baa3db83d" />
+
 
 ## 📁 Cấu trúc thư mục dự án
 
