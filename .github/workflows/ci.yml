@@ -22,9 +22,9 @@ jobs:
         run: npm install
         working-directory: back_end_managements
 
-      # Bước 4: Chạy test để xuất file coverage (lcov.info)
+      # Bước 4: Chạy test để xuất file coverage (Dùng npx để tự động sửa lỗi quyền chạy trên Linux)
       - name: Run tests & coverage
-        run: npm run test
+        run: npx jest --coverage
         working-directory: back_end_managements
 
       # Bước 5: Chạy quét SonarCloud và đẩy báo cáo lên dashboard
