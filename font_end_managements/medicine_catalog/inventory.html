@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaKeep - Pharmacy System</title>
+    <link rel="stylesheet" href="inventory.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </div>
+                <div class="brand-info">
+                    <span class="brand-name">PharmaKeep</span>
+                    <span class="brand-sub">Pharmacy System</span>
+                </div>
+            </div>
+            <!-- Bố trí ở cuối Sidebar -->
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="logout-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                    <span>Đăng xuất</span>
+                </button>
+            </div>
+
+            <nav class="sidebar-menu">
+                <p class="menu-label">MENU</p>
+                <ul class="menu-list">
+                    <li>
+                        <a href="#" class="menu-item " onclick="navigateTo(event, '../dashboard/dashboard.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+                            </svg>Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item active"
+                            onclick="navigateTo(event, '../medicine_catalog/inventory.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+                            </svg>Medicine Catalog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item"
+                            onclick="navigateTo(event, '../stock_input_output/stock_manager.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                            </svg>Stock In/Out
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item"
+                            onclick="navigateTo(event, '../suppliers/supplier_management.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h3.375c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m-1.5-7.75 3-1m-3 1a1.793 1.793 0 0 0-1.285 1.151l-.422 1.358m0 0-1.165 3.75M12.75 21h-.75V10.75h.75V21Z" />
+                            </svg>Suppliers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item sealed-menu-item"
+                            onclick="showSealedMessage(event, 'Reports & Analytics')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+                                <path d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+                            </svg>Reports & Analytics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item"
+                            onclick="navigateTo(event, '../staff_role/staff_management.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                            </svg>Staff & Roles
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item sealed-menu-item" onclick="showSealedMessage(event, 'Settings')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127c.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.43l-1.003.767c-.31.236-.456.63-.373 1.02a7.082 7.082 0 0 1 0 .238c-.084.39.063.784.373 1.02l1.003.767a1.125 1.125 0 0 1 .26 1.43l-1.296 2.247a1.125 1.125 0 0 1-1.37.49l-1.216-.456c-.356-.133-.751-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.43l1.004-.767c.31-.236.456-.63.372-1.02a7.07 7.07 0 0 1 0-.238c.084-.39-.063-.784-.373-1.02l-1.003-.767a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.49l1.216.456c.356 1.33.751.072 1.076-.124.072-.044.146-.087.22-.128c.332-.183.582-.495.645-.869l.214-1.28Z" />
+                            </svg>Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar-box"><span class="user-initials"></span></div>
+                <div class="user-info">
+                    <span class="user-name"></span>
+                    <span class="user-role"></span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <!-- HEADER -->
+            <header class="top-header">
+                <div class="search-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="search-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 1 15.75 4.5a7.5 7.5 0 0 1 0 10.5Z" />
+                    </svg>
+                    <input type="text" placeholder="Search transactions, medicines, suppliers..." class="search-input">
+                </div>
+                <div class="header-actions">
+                    <div class="lang-selector">
+                        <span class="lang-text">EN</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                            stroke="currentColor" class="dropdown-icon">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </div>
+                    <div class="notification-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="nav-icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                        </svg>
+                    </div>
+                    <div class="small-profile-avatar"></div>
+                </div>
+            </header>
+
+            <!-- TRANG QUẢN LÝ CHÍNH (INVENTORY) -->
+            <div id="inventory-section" class="app-section">
+                <div class="page-title-section">
+                    <div class="title-left">
+                        <h1 class="page-title">Medicine Inventory</h1>
+                        <p class="page-subtitle">Manage, filter, and track all pharmaceutical products in your
+                            warehouse.</p>
+                    </div>
+                    <button class="btn-primary" onclick="openModal('add-medicine-modal')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        Add New Medicine
+                    </button>
+                </div>
+
+                <section class="inventory-section">
+                    <div class="filter-bar">
+                        <div class="local-search-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 1 15.75 4.5a7.5 7.5 0 0 1 0 10.5Z" />
+                            </svg>
+                            <input id="local-search" type="text"
+                                placeholder="Search by medicine name, SKU, or active ingredient..."
+                                oninput="filterMedicines()">
+                        </div>
+                        <div class="filter-actions">
+                            <select name="category">
+                                <option value="">Category</option>
+                            </select>
+                            <select name="stock_status">
+                                <option value="">Stock Status</option>
+                            </select>
+                            <button type="button" class="btn-outline">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                </svg>
+                                Export Data
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive-wrapper">
+                        <table class="inventory-table">
+                            <thead>
+                                <tr>
+                                    <th>SKU / CODE</th>
+                                    <th>MEDICINE NAME</th>
+                                    <th>STATUS</th>
+                                    <th style="text-align: center;">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4"
+                                        style="text-align: center; padding: 40px 20px; color: #94a3b8; font-style: italic;">
+                                        No medicines available. Click "Add New Medicine" to create your first record.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- MODALS / POP-UPS CHỨA CÁC FORM                            -->
+            <!-- ========================================================= -->
+
+            <!-- 1. MODAL: ADD NEW MEDICINE -->
+            <div id="add-medicine-modal" class="modal-overlay" style="display: none;">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <h2>Add New Medicine</h2>
+                        <button class="modal-close" onclick="closeModal('add-medicine-modal')">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Medicine Name <span class="required">*</span></label>
+                                <input id="med-name" type="text" placeholder="e.g. Paracetamol 500mg">
+                            </div>
+                            <div class="form-group">
+                                <label>SKU / Barcode <span class="required">*</span></label>
+                                <input id="med-sku" type="text" placeholder="e.g. MED-001">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Active Ingredients</label>
+                                <input id="med-ingredients" type="text" placeholder="e.g. Paracetamol">
+                            </div>
+                            <div class="form-group">
+                                <label>Base Unit <span class="required">*</span></label>
+                                <select id="med-unit">
+                                    <option value="">Select unit...</option>
+                                    <option value="tablet">Viên (Tablet)</option>
+                                    <option value="box">Hộp (Box)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Storage Condition</label>
+                                <select id="med-storage">
+                                    <option value="">Select condition...</option>
+                                    <option value="cool">Store below 30°C (Cool)</option>
+                                    <option value="cold">Refrigerate (2°C - 8°C)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-cancel" onclick="closeModal('add-medicine-modal')">Cancel</button>
+                        <button class="btn-save" onclick="saveMedicine()">Save Medicine</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. MODAL: MEDICINE DETAILS (ĐÃ SỬA CHUẨN THEO CSS GỐC) -->
+            <div id="details-modal" class="modal-overlay" style="display: none;">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <h2>Medicine Details</h2>
+                        <button class="modal-close" onclick="closeModal('details-modal')">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="details-grid-summary">
+                            <div class="summary-card" style="padding: 20px;">
+                                <div class="card-meta-label" id="detail-title">Product Properties</div>
+                                <div class="meta-item-row">
+                                    <span class="meta-label">SKU / Barcode:</span>
+                                    <span class="meta-value" id="detail-sku">...</span>
+                                </div>
+                                <div class="meta-item-row">
+                                    <span class="meta-label">Base Unit:</span>
+                                    <span class="meta-value" id="detail-unit">...</span>
+                                </div>
+                                <div class="meta-item-row">
+                                    <span class="meta-label">Storage:</span>
+                                    <span class="meta-value" id="detail-storage">...</span>
+                                </div>
+                                <div class="meta-item-row">
+                                    <span class="meta-label">Status:</span>
+                                    <span class="meta-value" id="detail-status">...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-cancel" onclick="closeModal('details-modal')">Close</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. MODAL: EDIT MEDICINE (ĐÃ SỬA CHUẨN THEO CSS GỐC) -->
+            <div id="edit-medicine-modal" class="modal-overlay" style="display: none;">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <h2>Edit Medicine</h2>
+                        <button class="modal-close" onclick="closeModal('edit-medicine-modal')">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Medicine Name <span class="required">*</span></label>
+                                <input id="edit-name" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>SKU / Barcode</label>
+                                <input id="edit-sku" type="text" readonly
+                                    style="background-color: #f1f5f9; cursor: not-allowed;">
+                            </div>
+                            <div class="form-group">
+                                <label>Base Unit <span class="required">*</span></label>
+                                <select id="edit-unit">
+                                    <option value="tablet">Viên (Tablet)</option>
+                                    <option value="box">Hộp (Box)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Storage Condition</label>
+                                <select id="edit-storage">
+                                    <option value="cool">Store below 30°C (Cool & Dry)</option>
+                                    <option value="cold">Refrigerate (2°C - 8°C)</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Operational Status</label>
+                                <select id="edit-status">
+                                    <option value="Active">Active (Available for sale)</option>
+                                    <option value="Inactive">Inactive (Discontinued)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-cancel" onclick="closeModal('edit-medicine-modal')">Cancel</button>
+                        <button class="btn-save" onclick="updateMedicine()">Update Medicine</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- SCRIPT ĐIỀU KHIỂN POP-UP VÀ TÌM KIẾM -->
+    <script>
+        // Mở Modal
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        // Đóng Modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // =========================================================
+        // KẾT NỐI API VÀ XỬ LÝ TÌM KIẾM INVENTORY
+        // =========================================================
+        let allMedicines = []; // Biến toàn cục lưu trữ danh sách gốc phục vụ tìm kiếm nhanh
+        let currentEditingId = null;
+
+        // 1. Hàm tải danh sách từ API
+        async function loadMedicines() {
+            try {
+                const response = await fetch('http://localhost:3000/api/medicines');
+                allMedicines = await response.json(); // Lưu dữ liệu vào bộ nhớ tạm
+
+                // Reset ô tìm kiếm về trống khi tải lại bảng
+                if (document.getElementById('local-search')) {
+                    document.getElementById('local-search').value = '';
+                }
+
+                renderTable(allMedicines); // Đổ dữ liệu ra bảng
+            } catch (error) {
+                console.error("Lỗi tải danh sách:", error);
+            }
+        }
+
+        // Hàm hiển thị dữ liệu ra bảng HTML (Tách riêng để tái sử dụng khi tìm kiếm)
+        function renderTable(medicinesList) {
+            const tbody = document.querySelector('.inventory-table tbody');
+            tbody.innerHTML = '';
+
+            if (!medicinesList || medicinesList.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px 20px; color: #94a3b8; font-style: italic;">Không tìm thấy thuốc phù hợp.</td></tr>`;
+                return;
+            }
+
+            medicinesList.forEach(med => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><span class="sku-badge">${med.sku}</span></td>
+                    <td class="med-name">${med.medicine_name}</td>
+                    <td><span class="status-badge status-in-stock">${med.status || 'Active'}</span></td>
+                    <td style="text-align: center; display: flex; gap: 8px; justify-content: center;">
+                        <button class="btn-outline" onclick="loadMedicineDetail(${med.id}, 'detail')" style="padding: 6px 12px; font-size: 13px;">Detail</button>
+                        <button class="btn-outline" onclick="loadMedicineDetail(${med.id}, 'edit')" style="padding: 6px 12px; font-size: 13px;">Edit</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // CHỨC NĂNG MỚI: Lọc dữ liệu theo Tên thuốc hoặc SKU
+        function filterMedicines() {
+            const keyword = document.getElementById('local-search').value.toLowerCase().trim();
+
+            // Tiến hành lọc mảng dữ liệu tạm
+            const filteredResults = allMedicines.filter(med => {
+                const matchName = med.medicine_name ? med.medicine_name.toLowerCase().includes(keyword) : false;
+                const matchSku = med.sku ? med.sku.toLowerCase().includes(keyword) : false;
+                return matchName || matchSku; // Trả về nếu khớp 1 trong 2 điều kiện
+            });
+
+            renderTable(filteredResults); // Vẽ lại bảng với kết quả đã lọc
+        }
+
+        // 2. Hàm lấy chi tiết và đổ vào Modal tương ứng
+        async function loadMedicineDetail(id, action) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/medicines/${id}`);
+                const med = await response.json();
+
+                if (action === 'detail') {
+                    document.getElementById('detail-title').innerText = med.medicine_name;
+                    document.getElementById('detail-sku').innerText = med.sku;
+                    document.getElementById('detail-unit').innerText = med.base_unit || 'N/A';
+                    document.getElementById('detail-storage').innerText = med.storage_condition || 'N/A';
+                    document.getElementById('detail-status').innerText = med.status;
+
+                    openModal('details-modal');
+
+                } else if (action === 'edit') {
+                    currentEditingId = id;
+                    document.getElementById('edit-name').value = med.medicine_name;
+                    document.getElementById('edit-sku').value = med.sku;
+                    document.getElementById('edit-unit').value = med.base_unit;
+                    document.getElementById('edit-storage').value = med.storage_condition;
+                    if (document.getElementById('edit-status')) {
+                        document.getElementById('edit-status').value = med.status || 'Active';
+                    }
+
+                    openModal('edit-medicine-modal');
+                }
+            } catch (error) {
+                console.error("Lỗi:", error);
+                alert("Không thể tải thông tin thuốc!");
+            }
+        }
+
+        // 3. Hàm gửi dữ liệu cập nhật
+        async function updateMedicine() {
+            if (!currentEditingId) return;
+
+            const payload = {
+                medicine_name: document.getElementById('edit-name').value,
+                sku: document.getElementById('edit-sku').value,
+                base_unit: document.getElementById('edit-unit').value,
+                storage_condition: document.getElementById('edit-storage').value,
+                status: document.getElementById('edit-status') ? document.getElementById('edit-status').value : 'Active'
+            };
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/medicines/${currentEditingId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert("Cập nhật thành công!");
+                    closeModal('edit-medicine-modal');
+                    loadMedicines();
+                } else {
+                    alert("Lỗi: " + result.message);
+                }
+            } catch (error) {
+                console.error("Lỗi khi cập nhật:", error);
+            }
+        }
+
+        // 4. Hàm lưu dữ liệu từ form Add New
+        async function saveMedicine() {
+            const payload = {
+                medicine_name: document.getElementById('med-name').value,
+                sku: document.getElementById('med-sku').value,
+                active_ingredients: document.getElementById('med-ingredients').value,
+                base_unit: document.getElementById('med-unit').value,
+                storage_condition: document.getElementById('med-storage').value
+            };
+
+            if (!payload.medicine_name || !payload.sku || !payload.base_unit) {
+                alert("Vui lòng điền các trường bắt buộc (*)");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/medicines', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert("Thêm thuốc thành công!");
+                    closeModal('add-medicine-modal');
+
+                    document.getElementById('med-name').value = '';
+                    document.getElementById('med-sku').value = '';
+                    document.getElementById('med-ingredients').value = '';
+                    document.getElementById('med-unit').value = '';
+                    document.getElementById('med-storage').value = '';
+
+                    loadMedicines();
+                } else {
+                    alert("Lỗi: " + result.message);
+                }
+            } catch (error) {
+                console.error("Lỗi khi lưu thuốc:", error);
+            }
+        }
+
+        // Khởi chạy khi vừa load trang
+        window.onload = loadMedicines;
+        // Tạo sẵn container chứa thông báo khi file JS vừa load
+        if (!document.getElementById('toast-container')) {
+            const container = document.createElement('div');
+            container.id = 'toast-container';
+            document.body.appendChild(container);
+        }
+
+        function showSealedMessage(event, moduleName) {
+            // Ngăn chặn chuyển trang
+            event.preventDefault();
+
+            const container = document.getElementById('toast-container');
+
+            // Tạo phần tử thông báo mới
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+
+            // Nội dung bên trong thông báo
+            toast.innerHTML = `
+        <div class="toast-icon">🚧</div>
+        <div class="toast-content">
+            <span class="toast-title">Đang phát triển</span>
+            <span class="toast-message">Mục <b>${moduleName}</b> đã được niêm phong. Vui lòng quay lại sau nhé!</span>
+        </div>
+    `;
+
+            // Thêm thông báo vào góc màn hình
+            container.appendChild(toast);
+
+            // Dọn dẹp rác: Tự động xóa thẻ HTML sau khi animation kết thúc (khoảng 3.5 giây)
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.remove();
+                }
+            }, 3500);
+        }
+        function navigateTo(event, targetUrl) {
+            event.preventDefault(); // Chặn hành động mặc định của href="#"
+            window.location.href = targetUrl; // Điều hướng trang
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tìm nút Đăng xuất
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    // 1. Xóa trạng thái đăng nhập trong localStorage
+                    localStorage.removeItem('isLoggedIn');
+
+                    // 2. Chuyển hướng về file login.html trong thư mục auth
+                    window.location.href = '../auth/index.html';
+
+                    // (Nếu server của bạn cấu hình route trực tiếp như Express, bạn có thể dùng URL tuyệt đối như: window.location.href = '/auth/login';)
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

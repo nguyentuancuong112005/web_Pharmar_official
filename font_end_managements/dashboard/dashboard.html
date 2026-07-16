@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaKeep - Dashboard Overview</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </div>
+                <div class="brand-info">
+                    <span class="brand-name">PharmaKeep</span>
+                    <span class="brand-sub">Pharmacy System</span>
+                </div>
+            </div>
+
+            <!-- Bố trí ở cuối Sidebar -->
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="logout-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                    <span>Đăng xuất</span>
+                </button>
+            </div>
+
+            <nav class="sidebar-menu">
+                <p class="menu-label">MENU</p>
+                <ul class="menu-list">
+                    <li>
+                        <a href="#" class="menu-item active" onclick="navigateTo(event, '../dashboard/dashboard.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+                            </svg>Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item" onclick="navigateTo(event, '../medicine_catalog/inventory.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+                            </svg>Medicine Catalog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item"
+                            onclick="navigateTo(event, '../stock_input_output/stock_manager.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                            </svg>Stock In/Out
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item"
+                            onclick="navigateTo(event, '../suppliers/supplier_management.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h3.375c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m-1.5-7.75 3-1m-3 1a1.793 1.793 0 0 0-1.285 1.151l-.422 1.358m0 0-1.165 3.75M12.75 21h-.75V10.75h.75V21Z" />
+                            </svg>Suppliers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item sealed-menu-item"
+                            onclick="showSealedMessage(event, 'Reports & Analytics')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+                                <path d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+                            </svg>Reports & Analytics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item"
+                            onclick="navigateTo(event, '../staff_role/staff_management.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                            </svg>Staff & Roles
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item sealed-menu-item" onclick="showSealedMessage(event, 'Settings')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127c.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.43l-1.003.767c-.31.236-.456.63-.373 1.02a7.082 7.082 0 0 1 0 .238c-.084.39.063.784.373 1.02l1.003.767a1.125 1.125 0 0 1 .26 1.43l-1.296 2.247a1.125 1.125 0 0 1-1.37.49l-1.216-.456c-.356-.133-.751-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.43l1.004-.767c.31-.236.456-.63.372-1.02a7.07 7.07 0 0 1 0-.238c.084-.39-.063-.784-.373-1.02l-1.003-.767a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.49l1.216.456c.356 1.33.751.072 1.076-.124.072-.044.146-.087.22-.128c.332-.183.582-.495.645-.869l.214-1.28Z" />
+                            </svg>Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+
+            <div class="sidebar-user">
+                <div class="user-avatar-box"><span class="user-initials"></span></div>
+                <div class="user-info">
+                    <span class="user-name"></span>
+                    <span class="user-role"></span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="top-header">
+                <div class="search-wrapper">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor">
+                        <path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 1 15.75 4.5a7.5 7.5 0 0 1 0 10.5Z" />
+                    </svg>
+                    <input type="text" placeholder="Search transactions, medicines, suppliers..." class="search-input">
+                </div>
+                <div class="header-actions">
+                    <div class="lang-selector">
+                        <span class="lang-text">EN</span>
+                        <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="2.5" stroke="currentColor">
+                            <path d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </div>
+                    <div class="notification-badge-container">
+                        <svg class="bell-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor">
+                            <path
+                                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                        </svg>
+                        <span class="notif-count"></span>
+                    </div>
+                    <div class="small-profile-avatar"><span class="avatar-text"></span></div>
+                </div>
+            </header>
+
+            <div class="dashboard-welcome">
+                <h1 class="page-title">Dashboard Overview</h1>
+                <p class="page-subtitle">Welcome back, . Here's what's happening with your pharmacy today.</p>
+            </div>
+
+            <div class="metrics-grid">
+
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <div class="widget-icon-box box-teal">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
+                                <path
+                                    d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.827m11.379-8.16 1.15-.827M8.14 21.27l.707-1.03m10.304-7.516.707-1.03M12 3v1.5m0 15V21m-3.077-8.457-.513 1.41m5.13-14.095-.513 1.41M17.785 5.106l-.827 1.15m-8.16 11.379-.827 1.15m21.27-8.14-1.03.707m-7.516-10.304-1.03.707" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="widget-label">Total Medicines</span>
+                    <h2 class="widget-value"></h2>
+                    <div class="widget-trend trend-up">
+                        <span>%</span> vs last month
+                    </div>
+                </div>
+
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <div class="widget-icon-box box-amber">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
+                                <path d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="widget-label">Low Stock Alert</span>
+                    <h2 class="widget-value text-amber"></h2>
+                    <div class="widget-trend trend-neutral">
+                        <span></span> need restock
+                    </div>
+                </div>
+
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <div class="widget-icon-box box-rose">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
+                                <path
+                                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="widget-label">Expired goods</span>
+                    <h2 class="widget-value text-rose">0</h2>
+                    <div class="widget-trend trend-neutral">
+                        <span>0</span> items have already expired
+                    </div>
+                </div>
+
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <div class="widget-icon-box box-emerald">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor">
+                                <path
+                                    d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5h16.5M4.5 19.25V6.25m15 13V6.25M7.5 10.5h9m-9 3h9m-9 3h3m-3-9h.008v.008H7.5V7.5Zm3 0h.008v.008H10.5V7.5Zm3 0h.008v.008H13.5V7.5Zm3 0h.008v.008H16.5V7.5Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="widget-label">Today's Transactions</span>
+                    <h2 class="widget-value">$</h2>
+                    <div class="widget-trend trend-up">
+                        <span>%</span> orders
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="charts-double-column">
+
+                <div class="chart-container-card">
+                    <div class="chart-card-header">
+                        <div class="chart-title-box">
+                            <h3>Stock In vs Stock Out</h3>
+                            <p>Movement trends over the last 7 days</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper-canvas">
+                        <canvas id="stockMovementLineChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container-card category-card-layout">
+                    <div class="chart-card-header">
+                        <div class="chart-title-box">
+                            <h3>Category Distribution</h3>
+                            <p>Medicines by category</p>
+                        </div>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; height: 300px; width: 100%; margin-top: 1rem;">
+
+                        <!-- Phần 1: Biểu đồ -->
+                        <!-- Đã thêm justify-content và align-items để nhốt biểu đồ vào đúng giữa -->
+                        <div
+                            style="flex: 1; height: 100%; position: relative; display: flex; justify-content: center; align-items: center;">
+                            <canvas id="categoryDonutChart"></canvas>
+                        </div>
+
+                        <!-- Phần 2: Chữ TOTAL -->
+                        <div
+                            style="min-width: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-left: 20px; border-left: 2px dashed #e5e7eb;">
+                            <span class="center-qty"
+                                style="font-size: 32px; font-weight: 800; color: #1e293b; line-height: 1.2;">0</span>
+                            <span class="center-lbl"
+                                style="font-size: 13px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Total</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="table-alert-section-card">
+                    <div class="table-section-header">
+                        <div class="table-title-box">
+                            <h3>Critical Inventory Alerts</h3>
+                            <p>Medicines requiring immediate attention</p>
+                        </div>
+                        <a href="/medicines" class="btn-view-all-table">View all</a>
+                    </div>
+
+                    <div class="table-responsive-box">
+                        <table class="alert-data-table">
+                            <thead>
+                                <tr>
+                                    <th>Medicine Name</th>
+                                    <th>SKU</th>
+                                    <th>Current Stock</th>
+                                    <th>Expiry Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="medicine-name-cell"></td>
+                                    <td class="sku-cell-code"></td>
+                                    <td class="stock-qty-cell status-alert-red">units</td>
+                                    <td class="date-cell-format"></td>
+                                    <td>
+                                        <span class="alert-pill badge-danger">Out of Stock</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+        </main>
+    </div>
+    <!-- Modal hiển thị danh sách thuốc theo danh mục SKU -->
+    <div id="category-medicines-modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 9999; justify-content: center; align-items: center;">
+        <div
+            style="background: #ffffff; width: 650px; max-width: 90%; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); padding: 24px; display: flex; flex-direction: column; gap: 16px; font-family: 'Plus Jakarta Sans', sans-serif;">
+
+            <!-- Header của Modal -->
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;">
+                <h3 id="modal-category-title" style="font-size: 18px; font-weight: 700; color: #111827;">Danh sách thuốc
+                    - Loại</h3>
+                <button onclick="closeCategoryModal()"
+                    style="background: none; border: none; font-size: 24px; color: #9ca3af; cursor: pointer; line-height: 1;">&times;</button>
+            </div>
+
+            <!-- Bảng danh sách hiển thị dữ liệu thuốc -->
+            <div style="max-height: 380px; overflow-y: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #f1f5f9; color: #6b7280; font-weight: 600;">
+                            <th style="padding: 12px 8px;">Tên Thuốc</th>
+                            <th style="padding: 12px 8px;">Mã SKU</th>
+                            <th style="padding: 12px 8px;">Đơn vị tính</th>
+                            <th style="padding: 12px 8px;">Trạng thái hoạt động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-medicines-tbody">
+                        <!-- Dữ liệu từ database sẽ tự động đổ vào đây -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Footer nút đóng -->
+            <div style="display: flex; justify-content: flex-end; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                <button onclick="closeCategoryModal()"
+                    style="background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 8px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease;"
+                    onmouseover="this.style.backgroundColor='#e2e8f0'"
+                    onmouseout="this.style.backgroundColor='#f1f5f9'">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gọi hàm vẽ biểu đồ khi trang web load xong
+            renderStockMovementChart();
+        });
+
+        async function renderStockMovementChart() {
+            try {
+                // 1. Gọi API lấy dữ liệu tổng đã qua tính toán SUM() từ Backend
+                const res = await fetch('http://localhost:3000/api/dashboard/stock-movement');
+                const data = await res.json();
+
+                // 2. Định vị thẻ canvas của biểu đồ đường[cite: 2]
+                const ctxLine = document.getElementById('stockMovementLineChart').getContext('2d');
+
+                // 3. Khởi tạo Chart.js với dữ liệu thật[cite: 2]
+                new Chart(ctxLine, {
+                    type: 'line',
+                    data: {
+                        labels: data.labels, // Mảng ngày dạng ['10/07', '11/07', ...] nhận từ API
+                        datasets: [
+                            {
+                                label: 'Stock In',
+                                data: data.stockIn, // Mảng tổng số lượng nhập tương ứng nhận từ API
+                                borderColor: '#0da89b',
+                                backgroundGradientColor: 'rgba(14, 168, 155, 0.05)',
+                                tension: 0.4,
+                                fill: true,
+                                backgroundColor: function (context) {
+                                    const chart = context.chart;
+                                    const { ctx, chartArea } = chart;
+                                    if (!chartArea) return null;
+                                    const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                                    gradient.addColorStop(0, 'rgba(14, 168, 155, 0.15)');
+                                    gradient.addColorStop(1, 'rgba(14, 168, 155, 0.0)');
+                                    return gradient;
+                                }
+                            },
+                            {
+                                label: 'Stock Out',
+                                data: data.stockOut, // Mảng tổng số lượng xuất tương ứng nhận từ API
+                                borderColor: '#1e3a3a',
+                                tension: 0.4,
+                                fill: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { grid: { display: false }, ticks: { color: '#9ca3af' } },
+                            y: {
+                                border: { dash: [4, 4] },
+                                grid: { color: '#f3f4f6' },
+                                ticks: { color: '#9ca3af', stepSize: 10 } // Tự động căn chỉnh khoảng cách cột số
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Lỗi khi vẽ biểu đồ Stock Movement:", error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gọi hàm load tổng số thuốc khi trang vừa tải xong
+            loadTotalMedicines();
+        });
+
+        async function loadTotalMedicines() {
+            try {
+                const res = await fetch('http://localhost:3000/api/dashboard/total-medicines');
+                const data = await res.json();
+
+                // Dựa vào cấu trúc HTML của bạn, ta tìm thẻ .widget-value nằm dưới nhãn "Total Medicines"
+                const widgetLabels = document.querySelectorAll('.widget-label');
+
+                widgetLabels.forEach(label => {
+                    if (label.textContent.trim() === 'Total Medicines') {
+                        // Tìm đến thẻ h2 đứng ngay sau nhãn này để đổ dữ liệu vào
+                        const valueElement = label.nextElementSibling;
+                        if (valueElement && valueElement.classList.contains('widget-value')) {
+                            // Đổ tổng số thuốc (ví dụ: 3) vào giao diện
+                            valueElement.textContent = data.total;
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Lỗi khi đổ số liệu Total Medicines:", error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Chạy song song với các hàm load cũ của bạn
+            loadExpiredSoonAlert();
+        });
+
+        async function loadExpiredSoonAlert() {
+            try {
+                const res = await fetch('http://localhost:3000/api/dashboard/expired-under-30-days');
+                const data = await res.json();
+
+                // Tìm nhãn "Low Stock Alert" trên Widget Dashboard của bạn
+                const widgetLabels = document.querySelectorAll('.widget-label');
+
+                widgetLabels.forEach(label => {
+                    if (label.textContent.trim() === 'Low Stock Alert') {
+                        // Định vị thẻ h2 chứa số liệu hiển thị đứng ngay sau nhãn
+                        const valueElement = label.nextElementSibling;
+                        if (valueElement) {
+                            valueElement.textContent = data.total; // Đổ tổng số thuốc đếm được vào đây
+                        }
+
+                        // Cập nhật dòng chữ phụ phía dưới (trend) cho đồng bộ nội dung nếu cần
+                        const trendElement = label.parentElement.querySelector('.widget-trend');
+                        if (trendElement) {
+                            trendElement.innerHTML = `<span>${data.total}</span> items expiring soon`;
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Lỗi khi đổ số liệu lên Low Stock Alert widget:", error);
+            }
+        }
+        // 1. Hàm đổ dữ liệu cho phần Low Stock Alert (Dưới 30 ngày)
+        async function loadExpiredSoonAlert() {
+            try {
+                const res = await fetch('http://localhost:3000/api/dashboard/expired-under-30-days');
+                const data = await res.json();
+
+                const widgetLabels = document.querySelectorAll('.widget-label');
+                widgetLabels.forEach(label => {
+                    if (label.textContent.trim() === 'Low Stock Alert') {
+                        const valueElement = label.nextElementSibling;
+                        if (valueElement) {
+                            // Nếu data.total không có giá trị hoặc null/undefined, mặc định ghi là 0
+                            valueElement.textContent = data.total || 0;
+                        }
+
+                        const trendElement = label.parentElement.querySelector('.widget-trend');
+                        if (trendElement) {
+                            trendElement.innerHTML = `<span>${data.total || 0}</span> items expiring soon`;
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Lỗi khi đổ số liệu lên Low Stock Alert widget:", error);
+            }
+        }
+
+        // 2. Hàm đổ dữ liệu cho phần Expired Soon (Đã hết hạn <= 0 ngày)
+        async function loadExpiredTotalAlert() {
+            try {
+                const res = await fetch('http://localhost:3000/api/dashboard/expired-total');
+                const data = await res.json();
+
+                const widgetLabels = document.querySelectorAll('.widget-label');
+                widgetLabels.forEach(label => {
+                    // Đã đổi sang kiểm tra chữ 'Expired goods' theo giao diện mới của bạn
+                    if (label.textContent.trim() === 'Expired goods') {
+                        const valueElement = label.nextElementSibling;
+                        if (valueElement) {
+                            // Nếu API trả về null/undefined hoặc 0, toán tử || sẽ lấy số 0
+                            valueElement.textContent = data.total !== undefined ? data.total : 0;
+                        }
+
+                        const trendElement = label.parentElement.querySelector('.widget-trend');
+                        if (trendElement) {
+                            trendElement.innerHTML = `<span>${data.total || 0}</span> items have already expired`;
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Lỗi khi đổ số liệu lên Expired goods widget:", error);
+            }
+        }
+        async function renderCategoryChart() {
+            try {
+                const res = await fetch('http://localhost:3000/api/dashboard/category-distribution');
+                const result = await res.json();
+
+                const ctx = document.getElementById('categoryDonutChart');
+                if (!ctx) return;
+
+                if (!result.labels || result.labels.length === 0) {
+                    const centerQtyElement = document.querySelector('.center-qty');
+                    if (centerQtyElement) centerQtyElement.textContent = 0;
+                    return;
+                }
+
+                const totalQty = result.data.reduce((sum, value) => Number(sum) + Number(value), 0);
+                const centerQtyElement = document.querySelector('.center-qty');
+                if (centerQtyElement) {
+                    centerQtyElement.textContent = totalQty;
+                }
+
+                const palette = [
+                    '#0da89b', '#1e3a3a', '#f59e0b', '#ef4444',
+                    '#3b82f6', '#8b5cf6', '#ec4899', '#10b981',
+                    '#f97316', '#14b8a6', '#6366f1', '#d946ef'
+                ];
+                const bgColors = result.labels.map((_, index) => palette[index % palette.length]);
+
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: result.labels, // Mảng chữ cái ['A', 'M', 'P', 'T']
+                        datasets: [{
+                            data: result.data,
+                            backgroundColor: bgColors,
+                            borderWidth: 2,
+                            borderColor: '#ffffff',
+                            hoverOffset: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        aspectRatio: 1.5,
+                        cutout: '70%',
+                        // SỰ KIỆN CLICK VÀO CÁC PHÂN VÙNG MÀU CỦA BIỂU ĐỒ
+                        onClick: (event, elements, chart) => {
+                            if (elements.length > 0) {
+                                const index = elements[0].index;
+                                const clickedLabel = chart.data.labels[index]; // Lấy ra chữ cái đầu SKU (Ví dụ: 'A')
+                                openCategoryModal(clickedLabel);
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 15,
+                                    font: { size: 12, family: 'Plus Jakarta Sans' }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        let label = ' Loại ' + (context.label || '') + ': ';
+                                        label += context.parsed + ' sản phẩm';
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Lỗi khi vẽ biểu đồ Category Distribution thật:", error);
+            }
+        }
+
+        // --- HAI HÀM ĐIỀU KHIỂN ĐÓNG / MỞ VÀ TẢI DỮ LIỆU MODAL ---
+        async function openCategoryModal(label) {
+            const modal = document.getElementById('category-medicines-modal');
+            const title = document.getElementById('modal-category-title');
+            const tbody = document.getElementById('modal-medicines-tbody');
+
+            // Hiển thị tiêu đề động dựa trên chữ cái vừa click
+            title.textContent = `Danh sách thuốc - Phân nhóm SKU bắt đầu bằng chữ "${label}"`;
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 24px; color: #64748b;">Đang tải dữ liệu...</td></tr>';
+
+            // Mở modal dạng flex
+            modal.style.display = 'flex';
+
+            try {
+                // Gọi API lấy dữ liệu thuốc tương ứng từ Backend
+                const res = await fetch(`http://localhost:3000/api/dashboard/medicines-by-sku?letter=${label}`);
+                const list = await res.json();
+
+                tbody.innerHTML = '';
+                if (list.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 24px; color: #64748b;">Không tìm thấy loại thuốc nào thuộc phân loại này.</td></tr>';
+                    return;
+                }
+
+                // Đổ dữ liệu thật từ bảng MySQL vào bảng HTML
+                list.forEach(m => {
+                    const tr = document.createElement('tr');
+                    tr.style.borderBottom = '1px solid #f1f5f9';
+
+                    const badgeColor = m.status === 'Active' ? '#10b981' : '#ef4444';
+                    const badgeBg = m.status === 'Active' ? '#ecfdf5' : '#fee2e2';
+
+                    tr.innerHTML = `
+                <td style="padding: 12px 8px; font-weight: 700; color: #111827;">${m.medicine_name}</td>
+                <td style="padding: 12px 8px; font-family: monospace; color: #4b5563; font-weight: 600;">${m.sku}</td>
+                <td style="padding: 12px 8px; color: #4b5563;">${m.base_unit || '-'}</td>
+                <td style="padding: 12px 8px;">
+                    <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600; background-color: ${badgeBg}; color: ${badgeColor};">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background-color: ${badgeColor};"></span>
+                        ${m.status || 'Active'}
+                    </span>
+                </td>
+            `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error("Lỗi khi tải danh sách thuốc theo phân nhóm SKU:", err);
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 24px; color: #ef4444; font-weight: 600;">Lỗi kết nối máy chủ! Vui lòng thử lại.</td></tr>';
+            }
+        }
+
+        function closeCategoryModal() {
+            document.getElementById('category-medicines-modal').style.display = 'none';
+        }
+        // Đoạn này cực kỳ quan trọng, nó là cái công tắc bật các hàm khi web vừa load xong
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Nếu bác có gọi biểu đồ Line ở đây thì cứ để nguyên
+            // Thêm đúng dòng này vào để kích hoạt biểu đồ tròn:
+            renderCategoryChart();
+
+        });
+        // Tạo sẵn container chứa thông báo khi file JS vừa load
+        if (!document.getElementById('toast-container')) {
+            const container = document.createElement('div');
+            container.id = 'toast-container';
+            document.body.appendChild(container);
+        }
+
+        function showSealedMessage(event, moduleName) {
+            // Ngăn chặn chuyển trang
+            event.preventDefault();
+
+            const container = document.getElementById('toast-container');
+
+            // Tạo phần tử thông báo mới
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+
+            // Nội dung bên trong thông báo
+            toast.innerHTML = `
+        <div class="toast-icon">🚧</div>
+        <div class="toast-content">
+            <span class="toast-title">Đang phát triển</span>
+            <span class="toast-message">Mục <b>${moduleName}</b> đã được niêm phong. Vui lòng quay lại sau nhé!</span>
+        </div>
+    `;
+
+            // Thêm thông báo vào góc màn hình
+            container.appendChild(toast);
+
+            // Dọn dẹp rác: Tự động xóa thẻ HTML sau khi animation kết thúc (khoảng 3.5 giây)
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.remove();
+                }
+            }, 3500);
+        }
+        function navigateTo(event, targetUrl) {
+            event.preventDefault(); // Chặn hành động mặc định của href="#"
+            window.location.href = targetUrl; // Điều hướng trang
+        }
+        async function loadCriticalAlerts() {
+            try {
+                const res = await fetch('http://localhost:3000/api/dashboard/critical-alerts');
+                const alertList = await res.json();
+
+                const tbody = document.querySelector('.alert-data-table tbody');
+                tbody.innerHTML = '';
+
+                // Lấy mốc thời gian hôm nay (đặt giờ về 0 để so sánh cho chuẩn)
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                alertList.forEach(item => {
+                    const tr = document.createElement('tr');
+
+                    // Ép kiểu ngày hết hạn từ DB để so sánh
+                    const expDate = new Date(item.expiry_date);
+                    expDate.setHours(0, 0, 0, 0);
+
+                    // Tính toán khoảng cách (số ngày) giữa ngày hết hạn và hôm nay
+                    const diffTime = expDate - today;
+
+
+                    let statusHtml = '';
+
+                    // LOGIC XẾP HẠNG ƯU TIÊN HIỂN THỊ TRẠNG THÁI:
+                    if (item.quantity <= 0) {
+                        statusHtml = '<span class="alert-pill badge-danger">Out of Stock</span>';
+                    }
+                    // Nếu bạn muốn ngày mai hết hạn (diffDays = 1) cũng báo là "Expired" hoặc cảnh báo cấp cao:
+                    else if (expDate < today) {
+                        statusHtml = '<span class="alert-pill badge-danger">Expired/Urgent</span>';
+                    }
+                    // Các thuốc còn hạn từ 2 đến 30 ngày mới hiện "Expiring Soon"
+                    else if (expDate > today && 1 <= diffTime <= 30) {
+                        statusHtml = '<span class="alert-pill badge-warning">Expiring Soon</span>';
+                    }
+
+                    else {
+                        statusHtml = '<span class="alert-pill">Low Stock</span>';
+                    }
+
+
+                    tr.innerHTML = `
+                <td class="medicine-name-cell">${item.medicine_name}</td>
+                <td class="sku-cell-code">${item.sku}</td>
+                <td class="stock-qty-cell ${item.quantity <= 10 ? 'status-alert-red' : ''}">${item.quantity} units</td>
+                <td class="date-cell-format">${expDate.toLocaleDateString('en-GB')}</td>
+                <td>${statusHtml}</td>
+            `;
+
+                    tbody.appendChild(tr);
+                });
+            } catch (error) {
+                console.error("Lỗi khi đổ dữ liệu vào bảng Critical Inventory Alerts:", error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStockMovementChart();
+            loadTotalMedicines();
+            loadExpiredSoonAlert();
+            loadExpiredTotalAlert();
+            renderCategoryChart();
+
+            // THÊM DÒNG NÀY ĐỂ KÍCH HOẠT HÀM:
+            loadCriticalAlerts();
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tìm nút Đăng xuất
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    // 1. Xóa trạng thái đăng nhập trong localStorage
+                    localStorage.removeItem('isLoggedIn');
+
+                    // 2. Chuyển hướng người dùng về lại trang đăng nhập
+                    // Lưu ý: Đổi tên file 'login.html' thành tên file đăng nhập thực tế của bạn
+                    window.location.href = '../auth/index.html';
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tìm nút Đăng xuất
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    // 1. Xóa trạng thái đăng nhập trong localStorage
+                    localStorage.removeItem('isLoggedIn');
+
+                    // 2. Hiển thị thông báo đăng xuất thành công (Tùy chọn)
+                    if (typeof showToast === 'function') {
+                        showToast('success', 'Đăng xuất', 'Bạn đã đăng xuất thành công!');
+                    }
+
+                    // 3. Điều hướng người dùng quay trở lại trang đăng nhập
+                    setTimeout(() => {
+                        window.location.href = '../index.html';
+                    }, 800);
+                });
+            }
+        });
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = '../index.html';
+        }
+
+    </script>
+</body>
+
+</html>

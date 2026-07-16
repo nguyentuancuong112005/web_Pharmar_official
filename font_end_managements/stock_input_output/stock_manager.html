@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaKeep - Stock In/Out Management</title>
+    <link class="no-edit" rel="stylesheet" href="stock_manager.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- SIDEBAR CHUNG -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </div>
+                <div class="brand-info">
+                    <span class="brand-name">PharmaKeep</span>
+                    <span class="brand-sub">Pharmacy System</span>
+                </div>
+            </div>
+            <!-- Bố trí ở cuối Sidebar -->
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="logout-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                    <span>Đăng xuất</span>
+                </button>
+            </div>
+
+            <nav class="sidebar-menu">
+                <p class="menu-label">MENU</p>
+                <ul class="menu-list">
+                    <li>
+                        <a href="#" class="menu-item " onclick="navigateTo(event, '../dashboard/dashboard.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+                            </svg>Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item "
+                            onclick="navigateTo(event, '../medicine_catalog/inventory.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+                            </svg>Medicine Catalog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item active"
+                            onclick="navigateTo(event, '../stock_input_output/stock_manager.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                            </svg>Stock In/Out
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item"
+                            onclick="navigateTo(event, '../suppliers/supplier_management.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h3.375c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m-1.5-7.75 3-1m-3 1a1.793 1.793 0 0 0-1.285 1.151l-.422 1.358m0 0-1.165 3.75M12.75 21h-.75V10.75h.75V21Z" />
+                            </svg>Suppliers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item sealed-menu-item"
+                            onclick="showSealedMessage(event, 'Reports & Analytics')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+                                <path d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+                            </svg>Reports & Analytics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item"
+                            onclick="navigateTo(event, '../staff_role/staff_management.html')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                            </svg>Staff & Roles
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item sealed-menu-item" onclick="showSealedMessage(event, 'Settings')">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path
+                                    d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127c.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.43l-1.003.767c-.31.236-.456.63-.373 1.02a7.082 7.082 0 0 1 0 .238c-.084.39.063.784.373 1.02l1.003.767a1.125 1.125 0 0 1 .26 1.43l-1.296 2.247a1.125 1.125 0 0 1-1.37.49l-1.216-.456c-.356-.133-.751-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.43l1.004-.767c.31-.236.456-.63.372-1.02a7.07 7.07 0 0 1 0-.238c.084-.39-.063-.784-.373-1.02l-1.003-.767a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.49l1.216.456c.356 1.33.751.072 1.076-.124.072-.044.146-.087.22-.128c.332-.183.582-.495.645-.869l.214-1.28Z" />
+                            </svg>Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar-box"><span class="user-initials"></span></div>
+                <div class="user-info">
+                    <span class="user-name"></span>
+                    <span class="user-role"></span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- NỘI DUNG CHÍNH -->
+        <main class="main-content">
+            <!-- HEADER CHUNG -->
+            <header class="top-header">
+                <div class="search-wrapper">
+                    <input type="text" placeholder="Search system..." class="search-input">
+                </div>
+                <div class="header-actions">
+                    <div class="lang-selector">
+                        <span class="lang-text">EN</span>
+                    </div>
+                    <div class="small-profile-avatar"><span class="avatar-text">A</span></div>
+                </div>
+            </header>
+
+            <!-- ========================================== -->
+            <!-- VIEW 1: DANH SÁCH LỊCH SỬ CHÍNH            -->
+            <!-- ========================================== -->
+            <div id="main-list-view">
+                <div class="breadcrumb">
+                    <a href="#">Stock Management</a>
+                    <span>&gt; Transactions History</span>
+                </div>
+
+                <div class="page-header">
+                    <div class="header-left">
+                        <h1 class="page-title">Stock Transactions</h1>
+                        <p class="page-subtitle">Track and audit all inventory inbound and outbound records.</p>
+                    </div>
+                    <div class="header-right-buttons">
+                        <button id="btn-new-outbound" class="btn-create-outbound">- New Outbound</button>
+                        <button id="btn-new-inbound" class="btn-create-inbound">+ New Inbound</button>
+                    </div>
+                </div>
+
+                <form action="" method="GET" class="filter-card">
+                    <div class="filter-grid">
+                        <div class="filter-group">
+                            <label>Transaction Type</label>
+                            <select name="type" id="filter-type">
+                                <option value="">All Transactions</option>
+                                <option value="inbound">Inbound</option>
+                                <option value="outbound">Outbound</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Entity (Supplier / Target)</label>
+                            <input type="text" name="entity" placeholder="Search entity..." id="filter-entity">
+                        </div>
+                        <div class="filter-group">
+                            <label>Date</label>
+                            <input type="date" name="filter_date" id="filter-date">
+                        </div>
+                        <div class="filter-group">
+                            <label>Status</label>
+                            <select name="status" id="filter-status">
+                                <option value="">All Statuses</option>
+                                <option value="completed">Completed</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+                        <div class="filter-group action-align">
+                            <button type="submit" class="btn-filter-submit" id="btn-apply-filters">Apply
+                                Filters</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="table-section-container">
+                    <div class="table-responsive-wrapper">
+                        <table class="receipts-data-table">
+                            <thead>
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Type</th>
+                                    <th>Entity (Supplier / Target)</th>
+                                    <th>Date Executed</th>
+                                    <th>Total Qty</th>
+                                    <th>Total Value</th>
+                                    <th>Status</th>
+                                    <th style="text-align: center;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transaction-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- VIEW 2: FORM MODAL POPUP - TẠO PHIẾU NHẬP   -->
+            <!-- ========================================== -->
+            <div id="create-inbound-view" class="modal-overlay" style="display: none;">
+                <div class="modal-card-box">
+                    <div class="modal-card-header">
+                        <h2>Add New Inbound Receipt</h2>
+                        <button type="button" class="btn-modal-close-x">&times;</button>
+                    </div>
+
+                    <form action="" method="POST" id="form-inbound">
+                        <div class="modal-card-body">
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label>Supplier <span class="required-asterisk">*</span></label>
+                                    <select class="form-control" id="inbound-supplier" required>
+                                        <option value="">Select supplier...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Reference / Invoice No.</label>
+                                    <input type="text" class="form-control" id="inbound-ref" placeholder="e.g. INV-001">
+                                </div>
+                                <div class="form-group">
+                                    <label>Received Date <span class="required-asterisk">*</span></label>
+                                    <input type="date" id="inbound-date" class="form-control" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Delivery Notes</label>
+                                    <textarea class="form-control" id="inbound-notes" rows="2"
+                                        placeholder="Remarks about this inbound..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-items-section">
+                                <h3 class="form-section-title">Incoming Items</h3>
+                                <div class="table-responsive-wrapper">
+                                    <table class="dynamic-items-table" id="table-inbound-items">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 45%;">Medicine <span
+                                                        class="required-asterisk">*</span></th>
+                                                <th style="width: 20%;">Expiry <span class="required-asterisk">*</span>
+                                                </th>
+                                                <th style="width: 15%;">Qty <span class="required-asterisk">*</span>
+                                                </th>
+                                                <th style="width: 15%;">Cost <span class="required-asterisk">*</span>
+                                                </th>
+                                                <th style="width: 5%;">Act</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <select class="form-control medicine-select-inbound" required>
+                                                        <option value="">Select medicine...</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="date" class="form-control" required></td>
+                                                <td><input type="number" class="form-control" min="1" placeholder="0"
+                                                        required></td>
+                                                <td><input type="number" class="form-control" min="0" step="0.01"
+                                                        placeholder="0.00" required></td>
+                                                <td style="text-align: center;">
+                                                    <button type="button" class="btn-remove-row">&times;</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="button" class="btn-add-row" data-target="inbound">+ Add Item</button>
+                            </div>
+                        </div>
+
+                        <div class="modal-card-footer">
+                            <button type="button" class="btn-cancel">Cancel</button>
+                            <button type="submit" class="btn-submit-primary">Save Inbound</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- VIEW 3: FORM MODAL POPUP - TẠO PHIẾU XUẤT   -->
+            <!-- ========================================== -->
+            <div id="create-outbound-view" class="modal-overlay" style="display: none;">
+                <div class="modal-card-box">
+                    <div class="modal-card-header">
+                        <h2>Add New Outbound Receipt</h2>
+                        <button type="button" class="btn-modal-close-x">&times;</button>
+                    </div>
+
+                    <form action="" method="POST" id="form-outbound">
+                        <div class="modal-card-body">
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label>Target Location <span class="required-asterisk">*</span></label>
+                                    <input type="text" id="outbound-location" class="form-control"
+                                        placeholder="e.g. Clinic A..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Dispatch Reason <span class="required-asterisk">*</span></label>
+                                    <select class="form-control" id="outbound-reason" required>
+                                        <option value="">Select reason...</option>
+                                        <option value="transfer">Transfer to Branch</option>
+                                        <option value="supply">Supply to Clinic</option>
+                                        <option value="disposal">Disposal / Expired</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Dispatch Date <span class="required-asterisk">*</span></label>
+                                    <input type="date" id="outbound-date" class="form-control" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Justification / Remarks</label>
+                                    <textarea class="form-control" id="outbound-remarks" rows="2"
+                                        placeholder="Why is this stock being dispatched?"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-items-section">
+                                <h3 class="form-section-title">Items to Dispatch</h3>
+                                <div class="table-responsive-wrapper">
+                                    <table class="dynamic-items-table" id="table-outbound-items">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 75%;">Medicine (In Stock) <span
+                                                        class="required-asterisk">*</span></th>
+                                                <th style="width: 20%;">Qty <span class="required-asterisk">*</span>
+                                                </th>
+                                                <th style="width: 5%;">Act</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <select class="form-control medicine-select-outbound" required>
+                                                        <option value="">Select medicine...</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="number" class="form-control" min="1" placeholder="0"
+                                                        required></td>
+                                                <td style="text-align: center;">
+                                                    <button type="button" class="btn-remove-row">&times;</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="button" class="btn-add-row" data-target="outbound">+ Add Item</button>
+                            </div>
+                        </div>
+
+                        <div class="modal-card-footer">
+                            <button type="button" class="btn-cancel">Cancel</button>
+                            <button type="submit" class="btn-submit-primary">Confirm Dispatch</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- VIEW 4: POP-UP IN PHIẾU NHẬP (INBOUND)     -->
+            <!-- ========================================== -->
+            <!-- ========================================== -->
+            <!-- VIEW 4: POP-UP INBOUND RECEIPT DETAILS     -->
+            <!-- ========================================== -->
+            <div id="inbound-details-view" class="print-overlay-wrapper" style="display: none;">
+                <div class="print-paper-card">
+                    <div class="print-bill-header">
+                        <div class="company-brand">
+                            <h2>PharmaKeep</h2>
+                            <p>Pharmacy Management System</p>
+                        </div>
+                        <div class="bill-title-box">
+                            <h1>INBOUND RECEIPT</h1>
+                            <p class="bill-id">Receipt No: <span id="print-inbound-id"></span></p>
+                        </div>
+                    </div>
+                    <hr class="print-dashed-line">
+                    <div class="bill-meta-grid">
+                        <div>
+                            <p><strong>Supplier:</strong> <span id="print-inbound-supplier"></span></p>
+                            <p><strong>Ref/Invoice No:</strong> <span id="print-inbound-ref"></span></p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p><strong>Date:</strong> <span id="print-inbound-date"></span></p>
+                            <p><strong>Status:</strong> <span id="print-inbound-status"></span></p>
+                        </div>
+                    </div>
+                    <table class="bill-items-table">
+                        <thead>
+                            <tr>
+                                <th>Medicine</th>
+                                <th>Expiry Date</th>
+                                <th style="text-align: right;">Qty</th>
+                                <th style="text-align: right;">Unit Price</th>
+                                <th style="text-align: right;">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="print-inbound-items-body"></tbody>
+                    </table>
+                    <div class="bill-summary-box">
+                        <p>Total Payment: <span class="total-highlight" id="print-inbound-total"></span></p>
+                    </div>
+                    <div class="bill-notes-box">
+                        <p><strong>Notes:</strong> <span id="print-inbound-notes"></span></p>
+                    </div>
+                    <div class="bill-signature-section">
+                        <div>
+                            <p><strong>Created By</strong></p><span class="sign-space">(Sign & Name)</span>
+                        </div>
+                        <div>
+                            <p><strong>Storekeeper</strong></p><span class="sign-space">(Sign & Name)</span>
+                        </div>
+                    </div>
+
+                    <!-- CÁC NÚT EDIT VÀ SAVE -->
+                    <div class="print-actions-panel no-print"
+                        style="display: flex; gap: 10px; justify-content: flex-end;">
+                        <button type="button" id="btn-edit-inbound" class="btn-action-print-execute"
+                            style="background-color: #f59e0b;" onclick="toggleEditInbound()">Edit</button>
+                        <button type="button" id="btn-save-inbound" class="btn-action-print-execute"
+                            style="background-color: #10b981; display: none;" onclick="saveInboundEdits()">Save</button>
+                        <button type="button" class="btn-action-print-execute" onclick="window.print()">Print</button>
+                        <button onclick="document.getElementById('inbound-details-view').style.display = 'none'"
+                            style="background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 8px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease; margin-left: 8px;"
+                            onmouseover="this.style.backgroundColor='#e2e8f0'; this.style.color='#1e293b';"
+                            onmouseout="this.style.backgroundColor='#f1f5f9'; this.style.color='#475569';">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                /* Style cho các ô input khi bấm Edit */
+                .edit-inline-input {
+                    width: 100%;
+                    padding: 4px;
+                    border: 1px solid #cbd5e1;
+                    border-radius: 4px;
+                    font-family: inherit;
+                    font-size: inherit;
+                    box-sizing: border-box;
+                }
+
+                .edit-inline-input:focus {
+                    outline: none;
+                    border-color: #0ea5e9;
+                    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+                }
+            </style>
+
+            <!-- ========================================== -->
+            <!-- VIEW 5: POP-UP IN PHIẾU XUẤT (OUTBOUND)    -->
+            <!-- ========================================== -->
+            <div id="outbound-details-view" class="print-overlay-wrapper" style="display: none;">
+                <div class="print-paper-card">
+                    <div class="print-bill-header">
+                        <div class="company-brand">
+                            <h2>PharmaKeep</h2>
+                            <p>Pharmacy Management System</p>
+                        </div>
+                        <div class="bill-title-box">
+                            <h1>OUTBOUND RECEIPT</h1>
+                            <p class="bill-id">Receipt No: <span id="print-outbound-id"></span></p>
+                        </div>
+                    </div>
+                    <hr class="print-dashed-line">
+                    <div class="bill-meta-grid">
+                        <div>
+                            <p><strong>Target Location:</strong> <span id="print-outbound-location"></span></p>
+                            <p><strong>Dispatch Reason:</strong> <span id="print-outbound-reason"></span></p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p><strong>Date:</strong> <span id="print-outbound-date"></span></p>
+                            <p><strong>Status:</strong> <span id="print-outbound-status"></span></p>
+                        </div>
+                    </div>
+                    <table class="bill-items-table">
+                        <thead>
+                            <tr>
+                                <th>Medicine</th>
+                                <th style="text-align: right;">Qty Dispatched</th>
+                            </tr>
+                        </thead>
+                        <tbody id="print-outbound-items-body"></tbody>
+                    </table>
+                    <div class="bill-notes-box" style="margin-top: 30px;">
+                        <p><strong>Remarks:</strong> <span id="print-outbound-remarks"></span></p>
+                    </div>
+                    <div class="bill-signature-section">
+                        <div>
+                            <p><strong>Receiver</strong></p><span class="sign-space">(Sign & Name)</span>
+                        </div>
+                        <div>
+                            <p><strong>Storekeeper</strong></p><span class="sign-space">(Sign & Name)</span>
+                        </div>
+                    </div>
+
+                    <!-- BỔ SUNG CÁC NÚT EDIT VÀ SAVE CHO OUTBOUND -->
+                    <div class="print-actions-panel no-print"
+                        style="display: flex; gap: 10px; justify-content: flex-end;">
+                        <button type="button" id="btn-edit-outbound" class="btn-action-print-execute"
+                            style="background-color: #f59e0b;" onclick="toggleEditOutbound()">Edit</button>
+                        <button type="button" id="btn-save-outbound" class="btn-action-print-execute"
+                            style="background-color: #10b981; display: none;"
+                            onclick="saveOutboundEdits()">Save</button>
+                        <button type="button" class="btn-action-print-execute" onclick="window.print()">Print</button>
+                        <button onclick="document.getElementById('outbound-details-view').style.display = 'none'"
+                            style="background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 8px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease; margin-left: 8px;"
+                            onmouseover="this.style.backgroundColor='#e2e8f0'; this.style.color='#1e293b';"
+                            onmouseout="this.style.backgroundColor='#f1f5f9'; this.style.color='#475569';">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- ================= INBOUND RECEIPT DETAIL MODAL ================= -->
+            <div id="inboundDetailModal" class="pk-modal">
+                <div class="pk-modal-content">
+                    <div class="pk-modal-header">
+                        <h3>Inbound Receipt Details #<span id="txt-inbound-id"></span></h3>
+                        <span class="pk-close-btn" onclick="closeModal('inboundDetailModal')">&times;</span>
+                    </div>
+                    <div class="pk-modal-body">
+                        <!-- General information of the inbound receipt -->
+                        <div class="pk-form-grid">
+                            <div class="pk-form-group">
+                                <label>Supplier ID *</label>
+                                <span class="view-mode" id="view-inbound-supplier"></span>
+                                <input type="number" class="edit-mode pk-input" id="edit-inbound-supplier"
+                                    name="supplier_id">
+                            </div>
+                            <div class="pk-form-group">
+                                <label>Reference No</label>
+                                <span class="view-mode" id="view-inbound-reference"></span>
+                                <input type="text" class="edit-mode pk-input" id="edit-inbound-reference"
+                                    name="reference_no">
+                            </div>
+                            <div class="pk-form-group">
+                                <label>Received Date *</label>
+                                <span class="view-mode" id="view-inbound-date"></span>
+                                <input type="date" class="edit-mode pk-input" id="edit-inbound-date"
+                                    name="received_date">
+                            </div>
+                            <div class="pk-form-group">
+                                <label>Status</label>
+                                <span class="view-mode pk-badge" id="view-inbound-status"></span>
+                                <select class="edit-mode pk-input" id="edit-inbound-status" name="status">
+                                    <option value="Completed">Completed</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </div>
+                            <div class="pk-form-group full-width">
+                                <label>Delivery Notes</label>
+                                <span class="view-mode text-block" id="view-inbound-notes"></span>
+                                <textarea class="edit-mode pk-input" id="edit-inbound-notes" name="delivery_notes"
+                                    rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Detailed list of incoming medicines (Inbound Items) -->
+                        <h4 class="section-title">Incoming Items List</h4>
+                        <div class="table-responsive">
+                            <table class="pk-detail-table" id="table-inbound-items">
+                                <thead>
+                                    <tr>
+                                        <th>Medicine ID</th>
+                                        <th>Expiry Date</th>
+                                        <th>Qty</th>
+                                        <th>Unit Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data rows will be dynamically rendered via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pk-modal-footer">
+                        <button type="button" class="btn-pk btn-secondary"
+                            onclick="closeModal('inboundDetailModal')">Close</button>
+                        <button type="button" class="btn-pk btn-primary view-mode-btn"
+                            onclick="enableEditMode('inboundDetailModal')">Edit</button>
+                        <button type="button" class="btn-pk btn-success edit-mode-btn"
+                            onclick="saveInboundData()">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= OUTBOUND RECEIPT DETAIL MODAL ================= -->
+            <div id="outboundDetailModal" class="pk-modal">
+                <div class="pk-modal-content">
+                    <div class="pk-modal-header">
+                        <h3>Outbound Receipt Details #<span id="txt-outbound-id"></span></h3>
+                        <span class="pk-close-btn" onclick="closeModal('outboundDetailModal')">&times;</span>
+                    </div>
+                    <div class="pk-modal-body">
+                        <!-- General information of the outbound receipt -->
+                        <div class="pk-form-grid">
+                            <div class="pk-form-group">
+                                <label>Target Location *</label>
+                                <span class="view-mode" id="view-outbound-target"></span>
+                                <input type="text" class="edit-mode pk-input" id="edit-outbound-target"
+                                    name="target_location">
+                            </div>
+                            <div class="pk-form-group">
+                                <label>Dispatch Reason * (transfer/supply/disposal)</label>
+                                <span class="view-mode" id="view-outbound-reason"></span>
+                                <input type="text" class="edit-mode pk-input" id="edit-outbound-reason"
+                                    name="dispatch_reason">
+                            </div>
+                            <div class="pk-form-group">
+                                <label>Dispatch Date *</label>
+                                <span class="view-mode" id="view-outbound-date"></span>
+                                <input type="date" class="edit-mode pk-input" id="edit-outbound-date"
+                                    name="dispatch_date">
+                            </div>
+                            <div class="pk-form-group">
+                                <label>Status</label>
+                                <span class="view-mode pk-badge" id="view-outbound-status"></span>
+                                <select class="edit-mode pk-input" id="edit-outbound-status" name="status">
+                                    <option value="Completed">Completed</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </div>
+                            <div class="pk-form-group full-width">
+                                <label>Justification / Remarks</label>
+                                <span class="view-mode text-block" id="view-outbound-remarks"></span>
+                                <textarea class="edit-mode pk-input" id="edit-outbound-remarks" name="remarks"
+                                    rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Detailed list of items to dispatch (Outbound Items) -->
+                        <h4 class="section-title">Items to Dispatch List</h4>
+                        <div class="table-responsive">
+                            <table class="pk-detail-table" id="table-outbound-items">
+                                <thead>
+                                    <tr>
+                                        <th>Medicine ID</th>
+                                        <th>Qty</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data rows will be dynamically rendered via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pk-modal-footer">
+                        <button type="button" class="btn-pk btn-secondary"
+                            onclick="closeModal('outboundDetailModal')">Close</button>
+                        <button type="button" class="btn-pk btn-primary view-mode-btn"
+                            onclick="enableEditMode('outboundDetailModal')">Edit</button>
+                        <button type="button" class="btn-pk btn-success edit-mode-btn"
+                            onclick="saveOutboundData()">Save</button>
+                    </div>
+                </div>
+            </div>
+            <!-- ==========================================
+     MODAL CHI TIẾT NHẬP KHO (INBOUND)
+     ========================================== -->
+            <div id="view-inbound-modal" class="pk-modal">
+                <div class="pk-modal-content">
+                    <div class="pk-modal-header">
+                        <h2 id="inbound-modal-title" style="font-size: 18px; font-weight: 700; color: #111827;">Inbound
+                            Details</h2>
+                        <span class="pk-close-btn" onclick="closeInboundModal()">&times;</span>
+                    </div>
+                    <div class="pk-modal-body">
+                        <!-- Thông tin chung phiếu nhập -->
+                        <div class="pk-form-grid" id="inbound-info-grid"></div>
+
+                        <!-- Bảng hàng hóa nhập (6 cột chuẩn chỉnh) -->
+                        <h3 class="section-title" style="margin-top: 20px; font-weight: 600;">Item List</h3>
+                        <div style="overflow-x: auto;">
+                            <table class="pk-detail-table">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Medicine Name</th>
+                                        <th>Expiry Date</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Cost</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inbound-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pk-modal-footer">
+                        <button class="btn-pk btn-secondary" onclick="closeInboundModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+     MODAL CHI TIẾT XUẤT KHO (OUTBOUND)
+     ========================================== -->
+            <div id="view-outbound-modal" class="pk-modal">
+                <div class="pk-modal-content">
+                    <div class="pk-modal-header">
+                        <h2 id="outbound-modal-title" style="font-size: 18px; font-weight: 700; color: #111827;">
+                            Outbound Details</h2>
+                        <span class="pk-close-btn" onclick="closeOutboundModal()">&times;</span>
+                    </div>
+                    <div class="pk-modal-body">
+                        <!-- Thông tin chung phiếu xuất -->
+                        <div class="pk-form-grid" id="outbound-info-grid"></div>
+
+                        <!-- Bảng hàng hóa xuất (Chỉ có 3 cột gọn nhẹ) -->
+                        <h3 class="section-title" style="margin-top: 20px; font-weight: 600;">Item List</h3>
+                        <div style="overflow-x: auto;">
+                            <table class="pk-detail-table">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Medicine Name</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="outbound-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pk-modal-footer">
+                        <button class="btn-pk btn-secondary" onclick="closeOutboundModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+            <!-- CODE JAVASCRIPT ĐỒNG BỘ DỮ LIỆU ĐÚNG THEO CỘT DATABASE -->
+            <script>
+                // Biến toàn cục chứa danh sách lấy từ DB
+                let globalMedicines = [];
+                let globalSuppliers = [];
+
+                // Lấy các phần tử DOM của Modal Popup
+                const modalInbound = document.getElementById('create-inbound-view');
+                const modalOutbound = document.getElementById('create-outbound-view');
+
+                // TỰ ĐỘNG GỌI API LẤY DỮ LIỆU NGAY KHI LOAD TRANG
+                document.addEventListener('DOMContentLoaded', async () => {
+                    try {
+                        // 1. Gọi API lấy danh sách thuốc
+                        const medRes = await fetch('http://localhost:3000/api/medicines');
+                        globalMedicines = await medRes.json();
+                        populateMedicinesInContainer(document);
+
+                        // 2. Gọi API lấy danh sách nhà cung cấp (Chuẩn theo bảng suppliers)
+                        const supRes = await fetch('http://localhost:3000/api/suppliers');
+                        globalSuppliers = await supRes.json();
+                        populateSuppliersDropdown();
+
+                    } catch (error) {
+                        console.error("Lỗi khi load dữ liệu từ API:", error);
+                    }
+                });
+
+                // ==========================================
+                // SỰ KIỆN ĐÓNG / MỞ 2 MODAL POPUP
+                // ==========================================
+
+                document.getElementById('btn-new-inbound').addEventListener('click', () => {
+                    modalInbound.style.display = 'flex';
+                });
+
+                document.getElementById('btn-new-outbound').addEventListener('click', () => {
+                    modalOutbound.style.display = 'flex';
+                });
+
+                document.querySelectorAll('.btn-cancel, .btn-modal-close-x').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        modalInbound.style.display = 'none';
+                        modalOutbound.style.display = 'none';
+                    });
+                });
+
+                // ==========================================
+                // ĐỔ DỮ LIỆU VÀO CÁC Ô SELECT
+                // ==========================================
+
+                // Hàm đổ thuộc tính company_name vào ô chọn Supplier (id gốc là "inbound-supplier")
+                function populateSuppliersDropdown() {
+                    const supplierSelect = document.getElementById('inbound-supplier');
+                    if (!supplierSelect) return;
+
+                    supplierSelect.innerHTML = '<option value="">Select supplier...</option>';
+                    globalSuppliers.forEach(sup => {
+                        const opt = document.createElement('option');
+                        opt.value = sup.id;               // Lưu ID nhà cung cấp xuống DB
+                        opt.textContent = sup.company_name; // Hiển thị tên công ty từ ảnh schema của bạn
+                        supplierSelect.appendChild(opt);
+                    });
+                }
+
+                // Hàm đổ dữ liệu thuốc vào các ô select (Cả Inbound và Outbound)
+                function populateMedicinesInContainer(container) {
+                    const inboundSelects = container.querySelectorAll('.medicine-select-inbound');
+                    const outboundSelects = container.querySelectorAll('.medicine-select-outbound');
+
+                    const fillDropdown = (select) => {
+                        select.innerHTML = '<option value="">Select medicine...</option>';
+                        globalMedicines.forEach(med => {
+                            const opt = document.createElement('option');
+                            opt.value = med.id;
+                            opt.textContent = med.medicine_name;
+                            select.appendChild(opt);
+                        });
+                    };
+
+                    inboundSelects.forEach(fillDropdown);
+                    outboundSelects.forEach(fillDropdown);
+                }
+
+                // Lấy phần tử form Outbound
+                const formOutbound = document.getElementById('form-outbound');
+
+                if (formOutbound) {
+                    // Bắt sự kiện khi người dùng nhấn nút "Confirm Dispatch" (Nút submit form)
+                    formOutbound.addEventListener('submit', async (e) => {
+                        e.preventDefault(); // Ngăn chặn trang bị reload lại
+
+                        // 1. Gom dữ liệu thông tin chung của phiếu xuất
+                        const payload = {
+                            target_location: document.getElementById('outbound-location').value,
+                            dispatch_reason: document.getElementById('outbound-reason').value,
+                            dispatch_date: document.getElementById('outbound-date').value,
+                            remarks: document.getElementById('outbound-remarks').value,
+                            items: [] // Mảng trống để lát chứa danh sách thuốc
+                        };
+
+                        // 2. Gom tất cả các dòng vật tư/thuốc đang hiển thị trên giao diện
+                        // (Tìm tất cả các hàng <tr> nằm trong tbody của bảng vật tư xuất)
+                        const rows = document.querySelectorAll('#table-outbound-items tbody tr');
+
+                        rows.forEach(row => {
+                            // Lấy select chọn thuốc và input nhập số lượng của từng dòng
+                            const medicineSelect = row.querySelector('.medicine-select-outbound');
+                            const qtyInput = row.querySelector('input[type="number"]') || row.querySelector('.qty-input');
+
+                            if (medicineSelect && qtyInput) {
+                                const medicineId = medicineSelect.value;
+                                const quantity = qtyInput.value;
+
+                                // Chỉ đẩy vào mảng nếu dòng đó đã được chọn thuốc và nhập số lượng
+                                if (medicineId && quantity) {
+                                    payload.items.push({
+                                        medicine_id: parseInt(medicineId),
+                                        quantity: parseInt(quantity)
+                                    });
+                                }
+                            }
+                        });
+
+                        // Kiểm tra bảo vệ: Phiếu xuất phải có ít nhất 1 mặt thuốc mới cho lưu
+                        if (payload.items.length === 0) {
+                            alert('Vui lòng chọn ít nhất một mặt thuốc và điền số lượng trước khi xác nhận!');
+                            return;
+                        }
+
+                        // 3. Tiến hành gửi gói dữ liệu (payload) lên Backend bằng Fetch API
+                        try {
+                            const response = await fetch('http://localhost:3000/api/outbound', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(payload) // Chuyển object dữ liệu thành chuỗi JSON
+                            });
+
+                            const result = await response.json();
+
+                            if (response.ok && result.success) {
+                                alert(result.message); // Hiển thị thông báo thành công
+                                formOutbound.reset();  // Xóa sạch các ô nhập trên form sau khi lưu thành công
+                                document.getElementById('create-outbound-view').style.display = 'none'; // Đóng modal lại
+                            } else {
+                                alert('Thất bại: ' + result.message);
+                            }
+
+                        } catch (error) {
+                            console.error("Lỗi đường truyền kết nối Server:", error);
+                            alert("Không thể kết nối tới Server. Vui lòng kiểm tra lại Backend!");
+                        }
+                    });
+                }
+                // ==========================================
+                // XỬ LÝ SUBMIT FORM - LƯU PHIẾU NHẬP (SAVE INBOUND)
+                // ==========================================
+                const formInbound = document.getElementById('form-inbound');
+
+                if (formInbound) {
+                    formInbound.addEventListener('submit', async (e) => {
+                        e.preventDefault(); // Chặn reload trang
+
+                        // 1. Gom dữ liệu phần thông tin chung phiếu nhập
+                        const payload = {
+                            supplier_id: parseInt(document.getElementById('inbound-supplier').value),
+                            reference_no: document.getElementById('inbound-ref').value,
+                            received_date: document.getElementById('inbound-date').value,
+                            delivery_notes: document.getElementById('inbound-notes').value,
+                            items: []
+                        };
+
+                        // 2. Gom tất cả các dòng thuốc nhập (Incoming Items) trong bảng
+                        const rows = document.querySelectorAll('#table-inbound-items tbody tr');
+                        rows.forEach(row => {
+                            const medicineSelect = row.querySelector('.medicine-select-inbound');
+                            const expiryInput = row.querySelector('input[type="date"]') || row.querySelector('.expiry-input');
+                            const qtyInput = row.querySelector('.qty-input') || row.querySelectorAll('input[type="number"]')[0];
+                            const costInput = row.querySelector('.cost-input') || row.querySelectorAll('input[type="number"]')[1] || row.querySelector('input[step="0.01"]');
+
+                            if (medicineSelect && expiryInput && qtyInput && costInput) {
+                                const medicineId = medicineSelect.value;
+                                const expiryDate = expiryInput.value;
+                                const quantity = qtyInput.value;
+                                const unitCost = costInput.value;
+
+                                // Chỉ push dòng dữ liệu hợp lệ đã điền đầy đủ thông tin bắt buộc
+                                if (medicineId && expiryDate && quantity && unitCost) {
+                                    payload.items.push({
+                                        medicine_id: parseInt(medicineId),
+                                        expiry_date: expiryDate,
+                                        quantity: parseInt(quantity),
+                                        unit_cost: parseFloat(unitCost)
+                                    });
+                                }
+                            }
+                        });
+
+                        if (!payload.supplier_id) {
+                            alert('Vui lòng chọn Nhà cung cấp!');
+                            return;
+                        }
+
+                        if (payload.items.length === 0) {
+                            alert('Vui lòng nhập ít nhất một mặt thuốc với đầy đủ thông tin Expiry, Qty, Cost!');
+                            return;
+                        }
+
+                        // 3. Gửi dữ liệu qua API bằng Fetch
+                        try {
+                            const response = await fetch('http://localhost:3000/api/inbound', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(payload)
+                            });
+
+                            const result = await response.json();
+
+                            if (response.ok && result.success) {
+                                alert(result.message);
+                                formInbound.reset(); // Xóa trắng form sau khi lưu thành công
+                                modalInbound.style.display = 'none'; // Đóng popup nhập kho
+                            } else {
+                                alert('Thất bại: ' + result.message);
+                            }
+                        } catch (error) {
+                            console.error("Lỗi kết nối Server khi lưu Inbound:", error);
+                            alert("Không thể kết nối tới Server Backend!");
+                        }
+                    });
+                }
+                document.addEventListener('DOMContentLoaded', () => {
+                    // Load mặc định khi vừa vào trang
+                    loadTransactionsTable();
+
+                    // 1. TỰ ĐỘNG LỌC KHI THAY ĐỔI CÁC Ô SELECT HOẶC DATE (Sự kiện 'change')
+                    document.getElementById('filter-type')?.addEventListener('change', triggerAutoFilter);
+                    document.getElementById('filter-date')?.addEventListener('change', triggerAutoFilter);
+                    document.getElementById('filter-status')?.addEventListener('change', triggerAutoFilter);
+
+                    // 2. TỰ ĐỘNG LỌC KHI ĐANG GÕ VÀO Ô TÌM KIẾM ENTITY (Sự kiện 'input')
+                    document.getElementById('filter-entity')?.addEventListener('input', triggerAutoFilter);
+                });
+
+                // Hàm trung gian gom dữ liệu và kích hoạt lọc tự động
+                function triggerAutoFilter() {
+                    const type = document.getElementById('filter-type')?.value || '';
+                    const entity = document.getElementById('filter-entity')?.value || '';
+                    const date = document.getElementById('filter-date')?.value || '';
+                    const status = document.getElementById('filter-status')?.value || '';
+
+                    // Gọi hàm load lại bảng ngay lập tức
+                    loadTransactionsTable(type, entity, date, status);
+                }
+
+                // Hàm load dữ liệu và đổ vào Table (Giữ nguyên vẹn logic cũ của bạn)
+                async function loadTransactionsTable(type = '', entity = '', date = '', status = '') {
+                    try {
+                        // Khởi tạo các chuỗi query string gửi lên API
+                        let url = `http://localhost:3000/api/transactions?type=${type}&entity=${encodeURIComponent(entity)}&date=${date}&status=${status}`;
+
+                        const res = await fetch(url);
+                        const data = await res.json();
+
+                        // Tìm chính xác thẻ tbody của bảng dữ liệu
+                        const tbody = document.getElementById('transaction-table-body') || document.querySelector('table tbody');
+                        if (!tbody) return;
+                        data.sort((a, b) => a.transaction_id - b.transaction_id);
+
+                        tbody.innerHTML = ''; // Clear bảng
+
+
+                        if (data.length === 0) {
+                            tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding: 20px;">No transaction records found matching the filters.</td></tr>`;
+                            return;
+                        }
+
+                        data.forEach(t => {
+                            const row = document.createElement('tr');
+
+                            const typeDisplay = t.type === 'Inbound'
+                                ? '<span style="color: #0d9488; font-weight: 600; background: #ccfbf1; padding: 4px 8px; border-radius: 4px;">Inbound</span>'
+                                : '<span style="color: #ea580c; font-weight: 600; background: #ffedd5; padding: 4px 8px; border-radius: 4px;">Outbound</span>';
+
+                            // Thay thế dữ liệu trống bằng " - " theo yêu cầu của bạn
+                            const idDisplay = t.transaction_id ? `#${t.transaction_id}` : ' - ';
+                            const entityDisplay = t.entity_name ? t.entity_name : ' - ';
+                            const dateDisplay = t.date_executed ? new Date(t.date_executed).toLocaleDateString('en-GB') : ' - ';
+                            const qtyDisplay = (t.total_qty && t.total_qty > 0) ? t.total_qty : ' - ';
+                            const valueDisplay = (t.total_value !== null && t.total_value !== undefined)
+                                ? `$${parseFloat(t.total_value).toFixed(2)}`
+                                : ' - ';
+                            // 1. Lấy ngày hiện tại và đưa về mốc 00:00:00 để so sánh cho chuẩn
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0);
+
+                            // 2. Lấy ngày thực hiện giao dịch và đưa về mốc 00:00:00
+                            const txDate = t.date_executed ? new Date(t.date_executed) : null;
+                            if (txDate) {
+                                txDate.setHours(0, 0, 0, 0);
+                            }
+
+                            let statusText = ' - ';
+                            let statusColor = '#10b981';
+
+                            // 3. Kiểm tra điều kiện ngày để gán trạng thái và màu sắc tương ứng
+                            if (txDate) {
+                                if (txDate < today) {
+                                    statusText = 'In progress';
+                                    statusColor = '#f59e0b'; // Màu vàng cam sang xịn mịn
+                                } else {
+                                    statusText = 'Completed';
+                                    statusColor = '#10b981'; // Màu xanh lá hoàn thành
+                                }
+                            }
+
+                            // 4. Tạo mã hiển thị (giữ nguyên cấu trúc chấm tròn giống giao diện cũ của bạn)
+                            const statusDisplay = txDate
+                                ? `<span style="display:inline-block; width:6px; height:6px; background:${statusColor}; border-radius:50\%; margin-right:6px;"></span>${statusText}`
+                                : ' - ';
+
+                            row.innerHTML = `
+                <td><strong>${idDisplay}</strong></td>
+                <td>${typeDisplay}</td>
+                <td>${entityDisplay}</td>
+                <td>${dateDisplay}</td>
+                <td>${qtyDisplay}</td>
+                <td>${valueDisplay}</td>
+                <td>${statusDisplay}</td>
+                <td style="text-align: center;">
+                    <button onclick="viewDetail('${t.type}', ${t.transaction_id})" style="border: 1px solid #e2e8f0; background: #fff; padding: 4px 12px; border-radius: 4px; cursor: pointer;">View</button>
+                </td>
+            `;
+                            tbody.appendChild(row);
+                        });
+                    } catch (error) {
+                        console.error("Lỗi khi lọc dữ liệu Transactions:", error);
+                    }
+                }
+                // Tạo sẵn container chứa thông báo khi file JS vừa load
+                if (!document.getElementById('toast-container')) {
+                    const container = document.createElement('div');
+                    container.id = 'toast-container';
+                    document.body.appendChild(container);
+                }
+
+                function showSealedMessage(event, moduleName) {
+                    // Ngăn chặn chuyển trang
+                    event.preventDefault();
+
+                    const container = document.getElementById('toast-container');
+
+                    // Tạo phần tử thông báo mới
+                    const toast = document.createElement('div');
+                    toast.className = 'custom-toast';
+
+                    // Nội dung bên trong thông báo
+                    toast.innerHTML = `
+        <div class="toast-icon">🚧</div>
+        <div class="toast-content">
+            <span class="toast-title">Đang phát triển</span>
+            <span class="toast-message">Mục <b>${moduleName}</b> đã được niêm phong. Vui lòng quay lại sau nhé!</span>
+        </div>
+    `;
+
+                    // Thêm thông báo vào góc màn hình
+                    container.appendChild(toast);
+
+                    // Dọn dẹp rác: Tự động xóa thẻ HTML sau khi animation kết thúc (khoảng 3.5 giây)
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.remove();
+                        }
+                    }, 3500);
+                }
+                function navigateTo(event, targetUrl) {
+                    event.preventDefault(); // Chặn hành động mặc định của href="#"
+                    window.location.href = targetUrl; // Điều hướng trang
+                }
+                document.addEventListener('DOMContentLoaded', () => {
+                    // Tìm nút Đăng xuất
+                    const logoutBtn = document.getElementById('logoutBtn');
+
+                    if (logoutBtn) {
+                        logoutBtn.addEventListener('click', () => {
+                            // 1. Xóa trạng thái đăng nhập trong localStorage
+                            localStorage.removeItem('isLoggedIn');
+
+                            // 2. Chuyển hướng về file login.html trong thư mục auth
+                            window.location.href = '../auth/index.html';
+
+                            // (Nếu server của bạn cấu hình route trực tiếp như Express, bạn có thể dùng URL tuyệt đối như: window.location.href = '/auth/login';)
+                        });
+                    }
+                });
+                // Các biến toàn cục cho Outbound
+                let currentEditingOutboundId = null;
+                let currentOutboundItemsData = [];
+                let isOutboundEditMode = false;
+
+                async function viewDetail(type, id) {
+                    try {
+                        if (type.toLowerCase() === 'inbound') {
+                            // --- ĐÃ ĐIỀN CODE HOÀN CHỈNH CHO INBOUND Ở ĐÂY ---
+                            const response = await fetch(`http://localhost:3000/api/inbound/${id}`);
+                            const data = await response.json();
+
+                            if (!response.ok) throw new Error(data.message);
+
+                            const { receipt, items } = data;
+
+                            // Lưu trạng thái để phục vụ chức năng Edit
+                            currentEditingInboundId = id;
+                            currentInboundItemsData = items;
+                            isInboundEditMode = false;
+
+                            // Đặt lại hiển thị nút bấm Edit/Save
+                            document.getElementById('btn-edit-inbound').style.display = 'block';
+                            document.getElementById('btn-save-inbound').style.display = 'none';
+
+                            // Đổ dữ liệu thông tin chung của phiếu nhập
+                            document.getElementById('print-inbound-id').innerText = `#${receipt.id}`;
+                            document.getElementById('print-inbound-supplier').innerText = receipt.company_name || receipt.supplier_name || 'N/A';
+                            document.getElementById('print-inbound-ref').innerText = receipt.reference_no || 'N/A';
+                            document.getElementById('print-inbound-date').innerText = new Date(receipt.received_date).toLocaleDateString('en-GB');
+                            document.getElementById('print-inbound-status').innerText = receipt.status;
+                            document.getElementById('print-inbound-notes').innerText = receipt.delivery_notes || '';
+
+                            // Đổ danh sách thuốc nhập vào bảng in
+                            const tbody = document.getElementById('print-inbound-items-body');
+                            tbody.innerHTML = '';
+
+                            let totalAmount = 0;
+                            items.forEach(item => {
+                                const itemTotal = (item.quantity || 0) * (item.unit_cost || 0);
+                                totalAmount += itemTotal;
+
+                                const tr = document.createElement('tr');
+                                tr.setAttribute('data-item-id', item.id);
+                                tr.innerHTML = `
+                    <td>${item.medicine_name}</td>
+                    <td>${new Date(item.expiry_date).toLocaleDateString('en-GB')}</td>
+                    <td style="text-align: right;">${item.quantity}</td>
+                    <td style="text-align: right;">${formatCurrencyVN(item.unit_cost)}</td>
+                    <td style="text-align: right;">${formatCurrencyVN(itemTotal)}</td>
+                `;
+                                tbody.appendChild(tr);
+                            });
+
+                            // Hiển thị tổng tiền thanh toán
+                            document.getElementById('print-inbound-total').innerText = formatCurrencyVN(totalAmount);
+
+                            // Mở modal in ấn lên
+                            document.getElementById('inbound-details-view').style.display = 'flex';
+                        }
+                        else if (type.toLowerCase() === 'outbound') {
+                            const response = await fetch(`http://localhost:3000/api/outbound/${id}`);
+                            const data = await response.json();
+
+                            if (!response.ok) throw new Error(data.message);
+
+                            const { receipt, items } = data;
+
+                            // Lưu trạng thái để Edit
+                            currentEditingOutboundId = id;
+                            currentOutboundItemsData = items;
+                            isOutboundEditMode = false;
+
+                            // Đặt lại hiển thị nút bấm
+                            document.getElementById('btn-edit-outbound').style.display = 'block';
+                            document.getElementById('btn-save-outbound').style.display = 'none';
+
+                            // Đổ dữ liệu thông tin chung
+                            document.getElementById('print-outbound-id').innerText = `#${receipt.id}`;
+                            document.getElementById('print-outbound-location').innerText = receipt.target_location;
+
+                            // Dịch lý do xuất sang Tiếng Anh
+                            let reasonText = receipt.dispatch_reason;
+                            if (reasonText === 'transfer') reasonText = 'Transfer to Branch';
+                            if (reasonText === 'supply') reasonText = 'Supply to Clinic';
+                            if (reasonText === 'disposal') reasonText = 'Disposal / Expired';
+                            document.getElementById('print-outbound-reason').innerText = reasonText;
+
+                            document.getElementById('print-outbound-date').innerText = new Date(receipt.dispatch_date).toLocaleDateString('en-GB');
+                            document.getElementById('print-outbound-status').innerText = receipt.status;
+                            document.getElementById('print-outbound-remarks').innerText = receipt.remarks || '';
+
+                            // Đổ dữ liệu danh sách thuốc
+                            const tbody = document.getElementById('print-outbound-items-body');
+                            tbody.innerHTML = '';
+
+                            items.forEach(item => {
+                                const tr = document.createElement('tr');
+                                tr.setAttribute('data-item-id', item.id); // Lưu ID dòng chi tiết
+                                tr.innerHTML = `
+                    <td>${item.medicine_name}</td>
+                    <td style="text-align: right;">${item.quantity}</td>
+                `;
+                                tbody.appendChild(tr);
+                            });
+
+                            document.getElementById('outbound-details-view').style.display = 'flex';
+                        }
+                    } catch (error) {
+                        console.error("Error loading details:", error);
+                    }
+                }
+
+                // 2. HÀM CHUYỂN ĐỔI GIAO DIỆN SANG CHẾ ĐỘ EDIT (OUTBOUND)
+                function toggleEditOutbound() {
+                    isOutboundEditMode = true;
+
+                    document.getElementById('btn-edit-outbound').style.display = 'none';
+                    document.getElementById('btn-save-outbound').style.display = 'block';
+
+                    const tbody = document.getElementById('print-outbound-items-body');
+                    const rows = tbody.querySelectorAll('tr');
+
+                    // Chuyển Số lượng thành ô input
+                    rows.forEach(row => {
+                        const itemId = row.getAttribute('data-item-id');
+                        const itemData = currentOutboundItemsData.find(i => i.id == itemId);
+
+                        if (itemData) {
+                            row.cells[1].innerHTML = `<input type="number" class="edit-inline-input qty-edit" style="text-align: right;" value="${itemData.quantity}" min="1" />`;
+                        }
+                    });
+
+                    // Chuyển Remarks (Lưu ý) thành ô input
+                    const remarksSpan = document.getElementById('print-outbound-remarks');
+                    const currentRemarks = remarksSpan.innerText;
+                    remarksSpan.innerHTML = `<input type="text" id="edit-outbound-remarks-input" class="edit-inline-input" value="${currentRemarks}" placeholder="Enter remarks here..." />`;
+                }
+
+                // 3. HÀM GOM DỮ LIỆU ĐÃ CHỈNH SỬA VÀ GỬI LÊN SERVER (OUTBOUND)
+                async function saveOutboundEdits() {
+                    const tbody = document.getElementById('print-outbound-items-body');
+                    const rows = tbody.querySelectorAll('tr');
+
+                    const updatedItems = [];
+                    rows.forEach(row => {
+                        const itemId = row.getAttribute('data-item-id');
+                        const qtyInput = row.querySelector('.qty-edit');
+
+                        if (itemId && qtyInput) {
+                            updatedItems.push({
+                                item_id: parseInt(itemId),
+                                quantity: parseInt(qtyInput.value)
+                            });
+                        }
+                    });
+
+                    const remarksInput = document.getElementById('edit-outbound-remarks-input');
+                    const updatedRemarks = remarksInput ? remarksInput.value : '';
+
+                    const payload = {
+                        remarks: updatedRemarks,
+                        items: updatedItems
+                    };
+
+                    try {
+                        const response = await fetch(`http://localhost:3000/api/outbound/${currentEditingOutboundId}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok && result.success) {
+                            alert('Outbound receipt updated successfully!');
+                            // Load lại view chi tiết với dữ liệu mới nhất
+                            viewDetail('outbound', currentEditingOutboundId);
+                            // Load lại bảng danh sách chính
+                            loadTransactionsTable();
+                        } else {
+                            alert('Failed to update: ' + result.message);
+                        }
+                    } catch (error) {
+                        console.error("Error saving edits:", error);
+                        alert("Cannot connect to server to save edits.");
+                    }
+                }
+                // Các biến toàn cục cho Inbound
+                let currentEditingInboundId = null;
+                let currentInboundItemsData = [];
+                let isInboundEditMode = false;
+
+                // 1. HÀM BẬT CHẾ ĐỘ CHỈNH SỬA (Hiện các ô Input)
+                function toggleEditInbound() {
+                    isInboundEditMode = true;
+
+                    // Đổi nút Edit thành nút Save
+                    document.getElementById('btn-edit-inbound').style.display = 'none';
+                    document.getElementById('btn-save-inbound').style.display = 'block';
+
+                    const tbody = document.getElementById('print-inbound-items-body');
+                    const rows = tbody.querySelectorAll('tr');
+
+                    rows.forEach(row => {
+                        const itemId = row.getAttribute('data-item-id');
+                        const itemData = currentInboundItemsData.find(i => i.id == itemId);
+
+                        if (itemData) {
+                            // Đưa ngày về chuẩn YYYY-MM-DD để hiển thị trong <input type="date">
+                            const rawDate = new Date(itemData.expiry_date);
+                            const dateStr = rawDate.toISOString().split('T')[0];
+
+                            // Đổi text thành ô input
+                            row.cells[1].innerHTML = `<input type="date" class="edit-inline-input exp-edit" value="${dateStr}" />`;
+                            row.cells[2].innerHTML = `<input type="number" class="edit-inline-input qty-edit" style="text-align: right;" value="${itemData.quantity}" min="1" />`;
+                            row.cells[3].innerHTML = `<input type="number" step="0.01" class="edit-inline-input cost-edit" style="text-align: right;" value="${itemData.unit_cost}" min="0" />`;
+                            row.cells[4].innerText = '-'; // Tạm ẩn cột thành tiền khi đang edit
+                        }
+                    });
+
+                    // Chuyển dòng Notes thành ô input
+                    const notesSpan = document.getElementById('print-inbound-notes');
+                    const currentNotes = notesSpan.innerText;
+                    notesSpan.innerHTML = `<input type="text" id="edit-notes-input" class="edit-inline-input" value="${currentNotes}" placeholder="Enter notes here..." />`;
+                }
+
+                // 2. HÀM GOM DỮ LIỆU TỪ INPUT VÀ GỬI LÊN DATABASE
+                async function saveInboundEdits() {
+                    const tbody = document.getElementById('print-inbound-items-body');
+                    const rows = tbody.querySelectorAll('tr');
+
+                    const updatedItems = [];
+                    rows.forEach(row => {
+                        const itemId = row.getAttribute('data-item-id');
+                        const expInput = row.querySelector('.exp-edit');
+                        const qtyInput = row.querySelector('.qty-edit');
+                        const costInput = row.querySelector('.cost-edit');
+
+                        if (itemId && expInput && qtyInput && costInput) {
+                            updatedItems.push({
+                                item_id: parseInt(itemId),
+                                expiry_date: expInput.value,
+                                quantity: parseInt(qtyInput.value),
+                                unit_cost: parseFloat(costInput.value)
+                            });
+                        }
+                    });
+
+                    const notesInput = document.getElementById('edit-notes-input');
+                    const updatedNotes = notesInput ? notesInput.value : '';
+
+                    const payload = {
+                        delivery_notes: updatedNotes,
+                        items: updatedItems
+                    };
+
+                    try {
+                        const response = await fetch(`http://localhost:3000/api/inbound/${currentEditingInboundId}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok && result.success) {
+                            alert('Inbound receipt updated successfully!');
+                            // Gọi lại hàm viewDetail() để nó load lại data vừa lưu
+                            viewDetail('inbound', currentEditingInboundId);
+                        } else {
+                            alert('Failed to update: ' + result.message);
+                        }
+                    } catch (error) {
+                        console.error("Error saving edits:", error);
+                        alert("Cannot connect to server to save edits.");
+                    }
+                }
+                // Hàm format ngày và tiền tệ để hiển thị cho đẹp
+                function formatViewDate(dateString) {
+                    if (!dateString) return 'N/A';
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString('vi-VN');
+                }
+
+                function formatCurrencyVN(amount) {
+                    if (amount == null) return '0 ₫';
+                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+                }
+
+                // ==========================================
+                // ĐỌC CHI TIẾT PHIẾU NHẬP KHO (INBOUND)
+                // ==========================================
+                async function viewInbound(id) {
+                    try {
+                        const modal = document.getElementById('view-inbound-modal');
+                        const title = document.getElementById('inbound-modal-title');
+                        const infoGrid = document.getElementById('inbound-info-grid');
+                        const tableBody = document.getElementById('inbound-table-body');
+
+                        infoGrid.innerHTML = '';
+                        tableBody.innerHTML = '';
+                        title.textContent = `Inbound Receipt Details (#${id})`;
+
+                        const response = await fetch(`/api/inbound/${id}`);
+                        const data = await response.json();
+
+                        if (!data || !data.receipt) {
+                            alert("Không tìm thấy dữ liệu phiếu nhập!");
+                            return;
+                        }
+
+                        // Đổ thông tin chung phiếu nhập
+                        infoGrid.innerHTML = `
+            <div class="pk-form-group">
+                <label>Supplier Name</label>
+                <span class="view-mode">${data.receipt.company_name || data.receipt.supplier_name || 'N/A'}</span>
+            </div>
+            <div class="pk-form-group">
+                <label>Reference No.</label>
+                <span class="view-mode">${data.receipt.reference_no || 'N/A'}</span>
+            </div>
+            <div class="pk-form-group">
+                <label>Received Date</label>
+                <span class="view-mode">${formatViewDate(data.receipt.received_date)}</span>
+            </div>
+            <div class="pk-form-group">
+                <label>Status</label>
+                <span class="view-mode">${data.receipt.status || 'Completed'}</span>
+            </div>
+            <div class="pk-form-group full-width">
+                <label>Notes</label>
+                <span class="view-mode">${data.receipt.delivery_notes || 'N/A'}</span>
+            </div>
+        `;
+
+                        // Đổ danh sách thuốc nhập vào bảng
+                        tableBody.innerHTML = (data.items || []).map((item, index) => `
+            <tr>
+                <td>${index + 1}</td>
+                <td style="font-weight: 600; color: #111827;">${item.medicine_name || 'Unknown'}</td>
+                <td>${formatViewDate(item.expiry_date)}</td>
+                <td>${item.quantity || 0}</td>
+                <td>${formatCurrencyVN(item.unit_cost || 0)}</td>
+                <td style="font-weight: 600; color: #0ea89b;">${formatCurrencyVN((item.quantity || 0) * (item.unit_cost || 0))}</td>
+            </tr>
+        `).join('');
+
+                        modal.style.display = 'block';
+                    } catch (error) {
+                        console.error('Lỗi tải Inbound:', error);
+                        alert('Có lỗi xảy ra khi tải chi tiết phiếu nhập.');
+                    }
+                }
+
+                function closeInboundModal() {
+                    document.getElementById('view-inbound-modal').style.display = 'none';
+                }
+
+
+                // ==========================================
+                // ĐỌC CHI TIẾT PHIẾU XUẤT KHO (OUTBOUND)
+                // ==========================================
+                async function viewOutbound(id) {
+                    try {
+                        const modal = document.getElementById('view-outbound-modal');
+                        const title = document.getElementById('outbound-modal-title');
+                        const infoGrid = document.getElementById('outbound-info-grid');
+                        const tableBody = document.getElementById('view-outbound-modal').querySelector('#outbound-table-body');
+
+                        infoGrid.innerHTML = '';
+                        tableBody.innerHTML = '';
+                        title.textContent = `Outbound Receipt Details (#${id})`;
+
+                        const response = await fetch(`/api/outbound/${id}`);
+                        const data = await response.json();
+
+                        if (!data || !data.receipt) {
+                            alert("Không tìm thấy dữ liệu phiếu xuất!");
+                            return;
+                        }
+
+                        // Đổ thông tin chung phiếu xuất
+                        infoGrid.innerHTML = `
+            <div class="pk-form-group">
+                <label>Target Location</label>
+                <span class="view-mode">${data.receipt.target_location || 'N/A'}</span>
+            </div>
+            <div class="pk-form-group">
+                <label>Dispatch Reason</label>
+                <span class="view-mode">${data.receipt.dispatch_reason || 'N/A'}</span>
+            </div>
+            <div class="pk-form-group">
+                <label>Dispatch Date</label>
+                <span class="view-mode">${formatViewDate(data.receipt.dispatch_date)}</span>
+            </div>
+            <div class="pk-form-group">
+                <label>Status</label>
+                <span class="view-mode">${data.receipt.status || 'Completed'}</span>
+            </div>
+            <div class="pk-form-group full-width">
+                <label>Remarks</label>
+                <span class="view-mode">${data.receipt.remarks || 'N/A'}</span>
+            </div>
+        `;
+
+                        // Đổ danh sách thuốc xuất vào bảng
+                        tableBody.innerHTML = (data.items || []).map((item, index) => `
+            <tr>
+                <td>${index + 1}</td>
+                <td style="font-weight: 600; color: #111827;">${item.medicine_name || 'Unknown'}</td>
+                <td>${item.quantity || 0}</td>
+            </tr>
+        `).join('');
+
+                        modal.style.display = 'block';
+                    } catch (error) {
+                        console.error('Lỗi tải Outbound:', error);
+                        alert('Có lỗi xảy ra khi tải chi tiết phiếu xuất.');
+                    }
+                }
+
+                function closeOutboundModal() {
+                    document.getElementById('view-outbound-modal').style.display = 'none';
+                }
+
+                // Lắng nghe sự kiện click ra ngoài để đóng modal tương ứng
+                window.addEventListener('click', function (event) {
+                    const inboundModal = document.getElementById('view-inbound-modal');
+                    const outboundModal = document.getElementById('view-outbound-modal');
+                    if (event.target === inboundModal) inboundModal.style.display = 'none';
+                    if (event.target === outboundModal) outboundModal.style.display = 'none';
+                });
+            </script>
+</body>
+
+</html>
